@@ -1,8 +1,8 @@
 ------------------------------------------------------------------------------------------------------
--- Venantes
+-- Venantes 3 TBC classic
 --
--- Maintainer : lancestre , after Zirah on Blackhand (EU, Alliance)
---
+-- Dev : lancestre , after Zirah on Blackhand (EU, Alliance)
+-- Maintainer: LädyGaga and Yinmaris on Sulfuron (EU, Alliance)
 -- Based on Ideas by:
 --   Serenity and Cryolysis by Kaeldra of Aegwynn 
 --   Necrosis LdC by Lomig and Nyx (http://necrosis.larmes-cenarius.net)

@@ -2,9 +2,10 @@
 Name: SphereCore-3.0
 Revision: $Rev: 10000 $
 Developed by: lancestre
+Maintainer: LädyGaga and Yinmaris on Sulfuron (EU, Alliance)
 Website: 
 Description: core functions for sphere addons
-Dependencies: AceLibrary, LibStub
+Dependencies: Ace 3
 ]]
 
 local MAJOR_VERSION = 'SphereCore-3.0'

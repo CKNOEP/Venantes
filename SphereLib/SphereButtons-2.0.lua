@@ -1,9 +1,10 @@
 --[[
 Name: SphereButtons-2.0
 Revision: $Rev: 10000 $
+Maintainer: LädyGaga and Yinmaris on Sulfuron (EU, Alliance)
 
-Description: buttons and menu handling for sphere addons
-
+Description: inventory handling for sphere addons
+Dependencies: Ace3
 ]]
 
 local MAJOR_VERSION,MINOR_VERSION = "SphereButtons-2.0", 1

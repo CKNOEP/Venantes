@@ -2,9 +2,9 @@
 Name: SphereInventory-1.0
 Revision: $Rev: 10000 $
 Developed by: Zirah
-Website: http://thomas.weinert.info/zirah/
+Maintainer: LädyGaga and Yinmaris on Sulfuron (EU, Alliance)
 Description: inventory handling for sphere addons
-Dependencies: AceLibrary, AceOO-2.0
+Dependencies: Ace3
 ]]
 
 local MAJOR_VERSION = 'SphereInventory-2.0'
