@@ -1,0 +1,248 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
+  
+    <Button name="VenantesButtonTemplate" parent="UIParent" inherits="SecureActionButtonTemplate" virtual="true" enableMouse="true" toplevel="true" movable="true" hidden="false">
+        <Size>
+			<AbsDimension x="32" y="32"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="VenantesSphere" relativePoint="CENTER">
+				<Offset>
+					<AbsDimension x="-100" y="-50"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<HitRectInsets>
+			<AbsInset left="3" right="3" top="3" bottom="3"/>
+		</HitRectInsets>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parent_Icon" file="Interface\AddOns\Venantes\UI\Icons\WoWUnknownItem01" />
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString name="$parent_Caption" inherits="GameFontNormalSmall" text="">
+					<Color r="0.9" g="0.9" b="1.0" a="1"/>
+					<Anchors>
+						<Anchor point="CENTER" relativeTo="$parent" relativeFrom="CENTER">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+        <Scripts>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
+			<OnDragStart>
+				Venantes:OnDragStart(VenantesButtonTemplate);
+			</OnDragStart>
+			<OnDragStop>
+				Venantes:OnDragStop(VenantesButtonTemplate);
+			</OnDragStop>
+			<OnMouseUp>
+				Venantes:OnDragStop(VenantesButtonTemplate);
+			</OnMouseUp>
+        </Scripts>
+		<HighlightTexture file="Interface\AddOns\Venantes\UI\Solid\ButtonHighlight" />
+    </Button>
+    
+    <Button name="VenantesMenuButtonTemplate" parent="UIParent" inherits="SecureActionButtonTemplate" virtual="true" enableMouse="true" toplevel="true" movable="true" hidden="false">
+        <Size>
+			<AbsDimension x="32" y="32"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="VenantesSphere" relativePoint="CENTER">
+				<Offset>
+					<AbsDimension x="-100" y="-50"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<HitRectInsets>
+			<AbsInset left="3" right="3" top="3" bottom="3"/>
+		</HitRectInsets>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parent_Icon" file="Interface\AddOns\Venantes\UI\Icons\WoWUnknownItem01" />
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString name="$parent_Caption" inherits="GameFontNormalSmall" text="">
+					<Color r="0.9" g="0.9" b="1.0" a="1"/>
+					<Anchors>
+						<Anchor point="CENTER" relativeTo="$parent" relativeFrom="CENTER">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+        <Scripts>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
+			<OnDragStart>
+				Venantes:OnDragStart(VenantesMenuButtonTemplate);
+			</OnDragStart>
+			<OnDragStop>
+				Venantes:OnDragStop(VenantesMenuButtonTemplate);
+			</OnDragStop>
+        </Scripts>
+		<HighlightTexture file="Interface\AddOns\Venantes\UI\Solid\ButtonHighlight" />
+    </Button>
+    
+    <Button name="VenantesDynamicButtonTemplate" parent="UIParent" inherits="VenantesButtonTemplate" virtual="true">
+        <Size>
+			<AbsDimension x="36" y="36"/>
+		</Size>
+        <Scripts>
+			<OnEnter>
+				Venantes:ShowTooltip(VenantesDynamicButtonTemplate, "ATTRIBUTES", "ANCHOR_LEFT");
+			</OnEnter>
+		</Scripts>
+    </Button>
+    
+    <Button name="VenantesSphere" inherits="SecureActionButtonTemplate" hidden="false" enableMouse="true" parent="UIParent" movable="true">
+		<Size>
+			<AbsDimension x="64" y="64"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="UIParent" relativePoint="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="-100"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<HitRectInsets>
+			<AbsInset left="10" right="10" top="10" bottom="10"/>
+		</HitRectInsets>
+		<Layers>
+			<Layer level="BORDER">
+				<Texture name="$parent_Border" file="Interface\AddOns\Venantes\UI\Solid\SphereBorder" />
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture name="$parent_Icon" file="Interface\AddOns\Venantes\UI\Solid\SphereIcon" />
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture name="$parent_Highlight" file="Interface\AddOns\Venantes\UI\Solid\SphereHighlight" />
+				<FontString name="VenantesSphereCaption" inherits="GameFontNormal" text="Venantes">
+					<Color r="0.9" g="0.9" b="1.0" a="1"/>
+					<Anchors>
+						<Anchor point="CENTER" relativeTo="VenantesSphere" relativeFrom="CENTER">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnEnter>
+				Venantes:ShowTooltip(VenantesSphere, "MAIN", "ANCHOR_LEFT");
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
+			<OnDragStart>
+				Venantes:OnDragStart(VenantesSphere);
+
+			</OnDragStart>
+			<OnDragStop>
+				Venantes:OnDragStop(VenantesSphere);
+			</OnDragStop>
+			<OnMouseUp>
+				Venantes:OnDragStop(VenantesSphere);
+			</OnMouseUp>
+		</Scripts>
+	</Button>  
+    
+    <Button name="VenantesCircle" hidden="false" enableMouse="false" parent="UIParent">
+		<Size>
+			<AbsDimension x="64" y="64"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="VenantesSphere" relativePoint="CENTER"/>
+		</Anchors>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture name="$parentShards" file="Interface\AddOns\Venantes\UI\Solid\Shards\Shard12"/>
+            </Layer>
+        </Layers>
+    </Button>
+    
+    <Button name="VenantesButtonDrink" inherits="VenantesButtonTemplate">
+		<Scripts>
+			<OnEnter>
+				Venantes:ShowTooltip(VenantesButtonDrink, "DRINK", "ANCHOR_LEFT");
+			</OnEnter>
+		</Scripts>
+	</Button>
+    <Button name="VenantesButtonPotion" inherits="VenantesButtonTemplate">
+		<Scripts>
+			<OnEnter>
+				Venantes:ShowTooltip(VenantesButtonPotion, "POTION", "ANCHOR_LEFT");
+			</OnEnter>
+		</Scripts>
+	</Button>    
+    <Button name="VenantesButtonMount" inherits="VenantesButtonTemplate">
+        <Scripts>
+			<OnEnter>
+				Venantes:ShowTooltip(VenantesButtonMount, "MOUNT", "ANCHOR_LEFT");
+			</OnEnter>
+		</Scripts>
+	</Button>
+    <Button name="VenantesButtonPetMenu" inherits="VenantesMenuButtonTemplate">
+        <Scripts>
+			<OnEnter>
+				Venantes:ShowTooltip(VenantesButtonPetMenu, "PETMENU", "ANCHOR_LEFT");
+			</OnEnter>
+		</Scripts>
+	</Button>
+    <Button name="VenantesButtonAspectMenu" inherits="VenantesMenuButtonTemplate">
+        <Scripts>
+			<OnEnter>
+				Venantes:ShowTooltip(VenantesButtonAspectMenu, "ASPECTMENU", "ANCHOR_LEFT");
+			</OnEnter>
+		</Scripts>
+	</Button>
+    <Button name="VenantesButtonTrackingMenu" inherits="VenantesMenuButtonTemplate">
+        <Scripts>
+			<OnEnter>
+				Venantes:ShowTooltip(VenantesButtonTrackingMenu, "TRACKINGMENU", "ANCHOR_LEFT");
+			</OnEnter>
+		</Scripts>
+	</Button>
+    <Button name="VenantesButtonTrapsMenu" inherits="VenantesMenuButtonTemplate">
+        <Scripts>
+			<OnEnter>
+				Venantes:ShowTooltip(VenantesButtonTrapsMenu, "TRAPSMENU", "ANCHOR_LEFT");
+			</OnEnter>
+		</Scripts>
+	</Button>
+    <Button name="VenantesButtonActionOne" inherits="VenantesButtonTemplate">
+        <Scripts>
+			<OnEnter>
+				Venantes:ShowTooltip(VenantesButtonActionOne, "ACTION_ONE", "ANCHOR_LEFT");
+			</OnEnter>
+		</Scripts>
+	</Button>
+    <Button name="VenantesButtonActionTwo" inherits="VenantesButtonTemplate">
+        <Scripts>
+			<OnEnter>
+				Venantes:ShowTooltip(VenantesButtonActionTwo, "ACTION_TWO", "ANCHOR_LEFT");
+			</OnEnter>
+		</Scripts>
+	</Button>
+    <Button name="VenantesButtonActionThree" inherits="VenantesButtonTemplate">
+        <Scripts>
+			<OnEnter>
+				Venantes:ShowTooltip(VenantesButtonActionThree, "ACTION_THREE", "ANCHOR_LEFT");
+			</OnEnter>
+		</Scripts>
+	</Button>
+    
+	<GameTooltip name="SphereInfoTooltip" frameStrata="LOW" toplevel="true" movable="true" parent="UIParent" inherits="GameTooltipTemplate" />
+</Ui>

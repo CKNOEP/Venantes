@@ -1,0 +1,28 @@
+Mounts:
+Black War Wolf
+Black War Ram				- 29467
+Black War Steed	   			- 29468
+Black War Tiger				- 29471
+Cobalt Riding Talbuk			- 31830
+Silver Riding Talbuk			- 31832
+Tan Riding Talbuk			- 31834
+White Riding Talbuk			- 31836
+Cobalt War Talbuk			- 29227
+Silver War Talbuk			- 29229
+War Talbuk				- 29230
+White War Talbuk			- 29231
+Dark Riding Talbuk			- 28915
+Dark War Talbuk				- 29228
+
+
+Food:
+Smoked Talbuk Vension (4320)		- 27854
+Clefthoof Ribs (7500)			- 29451
+
+Potion:
+Violate Healing Potion (1050-1750) 	- 13446
+
+
+Buff Food:
+Roasted Clefthoof (7500, 20 Strength + Spirit) - 27658
+

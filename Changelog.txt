@@ -1,0 +1,142 @@
+-----------------------------------------------------------------------
+|                                                                     |
+|	Venantes 2                                                    |
+|                                                                     |
+-----------------------------------------------------------------------
+
+ToDo 2.0 Release
+- tests and bugfixes
+
+ToDo > 2.0
+- command line options
+- button sort dialog
+- restack items
+- key bindings
+- ...
+
+-----------------------------------------------------------------------
+
+2.0 RC6
+- disabled bag scans in combat
+- optimized memory handling
+- optimized ammo count
+- small bugfixes
+
+2.0 RC5
+- readded Zone check for AQ 
+  (why are the aq mounts "useable" outside AQ?)
+- added zone check for outland
+- added texture check to item data function
+- moved call pet button in pet menu
+- added some fallbacks for problems with external libs
+- updated to PeriodicTable-3.0
+- added new mount icons
+
+2.0 RC4
+- modified mount handling
+- updated to PeriodicTable-2.0
+
+2.0 RC3
+- updated toc number
+- updated ace libraries
+
+2.0 RC2
+- added several textures
+- fixed tooltip bugs
+- now remembers aspects/trackings/traps casted in combat
+- localized spells in pet macro (right click)
+- added pet happyness to sphere circle
+- added FuBar support (includes minimap icon)
+- moved Venantes to Ace2 category "Hunter"
+- fixed some toc file issues
+- removed all translations from SphereLoader
+
+2.0 RC1
+- added several textures
+- added traps to button actions
+- added skin selection
+- redesigned "Solid" skin
+- added "Flat" skin
+- added "Sprocket" skin
+- added option for sphere transparency
+- added option for button transparency
+- added option to order buttons counter clockwise
+- reordered aspects
+- added icons for frostwolf/stormpike trinkets
+- move/close option window if another windows is opened
+- added new option tab debug (get item ids, missing textures)
+- moved all internal language dependent strings to one place
+- added Totemus and Arcanum to SphereLoader
+- improved SphereLoader
+
+2.0 beta 10
+- smaller font size for cooldowns
+- dragable options window
+- added French localisation and speeches
+- added Chinese localisation (dummy file)
+- added Chinese speeches from Venantes 1 (dummy file)
+- added option to show tooltip at default position
+- using PeriodicTable for item information now
+- added grid function for button alignment
+
+2.0 beta 9
+- fixed hearthstone bug
+- fixed problems with actions in sphere tooltip
+- added trinket slots to button actions - removed items
+- added "Eagle Eye", "Eyes Of The Beast", "Beast Lore" to button actions
+- menus can now stay open (only closed with menu button left click)
+- menus now hide after 4 seconds delay
+- pet menu now casts "Mend Pet"/"Eyes of the Beast" on right/middle click
+- aspect, tracking and traps menus now remember the last two spells casted
+  while not in combat, can recast on right click (second last spell) and
+  middle click (last spell)
+- aspect, tracking and traps menus now show icon of the remembered spell 
+  (right click)
+
+2.0 beta 8
+- fixed option dialog bug (BC)
+- fixed option action tooltip bug (low level char)
+- fixed toc to include Gratuity-2.0
+- better memory use (hopefully)
+
+2.0 beta 7
+- minor bugfix for option dialog action tooltips
+
+2.0 beta 6
+- removed some debug stuff
+- added several spells and items
+- increased the size of the buttons in the menus
+- if not locked to the sphere menus expand now depending on the 
+  horizontal menu button position
+- cooldowns on buttons and in tooltips
+- added mana to action tooltips
+- tint buttons if not enough mana
+- highlight mountbutton if mounted
+- better mount handling (for aq, prepared for outland)
+- ammo name in sphere tooltip
+
+2.0 beta 5
+- removed some debug messages (hearthstone)
+
+2.0 beta 4
+- fixed Hearthstone bug
+
+2.0 beta 3
+- added Volley, Bestial Wrath, Intimidation to actions list
+- added menu tooltips
+
+2.0 beta 2
+- added option to block texture errors
+- removed some debug messages
+- fixed mount random message
+- set the circle to 90% opacity
+- added % output to circle text
+- added missing texture für snake pet
+- added Flare to button actions
+- fixed tooltip for third action button
+- some minor cleanup
+- smaller clickable area for sphere
+
+2.0 beta 1
+- first public release of Venantes 2
+- complete rewrite based on Ace2
