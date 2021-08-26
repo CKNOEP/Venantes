@@ -454,7 +454,7 @@ end
 
 -- tooltip functions
 function Venantes:ShowTooltip(element, buttonId, anchor)
-   -- print(element, buttonId, anchor)
+   -- print(self,element, buttonId, anchor)
 	if not self.db.profile.buttonTooltips then
         return
     end
@@ -704,13 +704,13 @@ function Venantes:UpdateStatus()
         local statusCircle = 0;
         local hasPet = HasPetUI();
         if circleInfo == 'MANA' then
-            statusCircle = math.floor((UnitMana('player') * 16 / UnitManaMax('player')) + 0.5);
+            statusCircle = math.floor((UnitPower("player",SPELL_POWER_MANA) * 16 / UnitPowerMax("player",SPELL_POWER_MANA)) + 0.5);
         elseif circleInfo == 'HEALTH' then
             statusCircle = math.floor((UnitHealth('player') * 16 / UnitHealthMax('player')) + 0.5);
         elseif circleInfo == 'XP' then
             statusCircle = math.floor((UnitXP('player') * 16 / UnitXPMax('player')) + 0.5);
         elseif hasPet and circleInfo == 'PET_MANA' then
-            statusCircle = math.floor((UnitMana('pet') * 16 / UnitManaMax('pet')) + 0.5);
+            statusCircle = math.floor((UnitPower("pet",SPELL_POWER_ENERGY) * 16 / UnitPowerMax("pet",SPELL_POWER_ENERGY)) + 0.5);
         elseif hasPet and circleInfo == 'PET_HEALTH' then
             statusCircle = math.floor((UnitHealth('pet') * 16 / UnitHealthMax('pet')) + 0.5);
         elseif hasPet and circleInfo == 'PET_XP' then
@@ -735,7 +735,7 @@ function Venantes:UpdateStatus()
         local statusText = '';
         local hasPet = HasPetUI();
         if textInfo == 'AMMO' then
-            local ammoCount = self:GetAmmoCount(L['AMMO']);
+            local ammoCount = SphereCore:GetAmmoCount(L['AMMO']);
             if ammoCount < 200 then
                 statusText = '|c00FF0000'..ammoCount..'|r';
             elseif ammoCount < 600 then
@@ -744,11 +744,11 @@ function Venantes:UpdateStatus()
                 statusText = ammoCount;            
             end
         elseif textInfo == 'MANA' then
-            statusText = (math.floor((UnitMana('player') * 100 / UnitManaMax('player')) + 0.5))..'%\n'..UnitMana('player');
+            statusText = (math.floor((UnitPower("player",SPELL_POWER_MANA) * 100 / UnitPowerMax("player",SPELL_POWER_MANA)) + 0.5))..'%\n'..UnitPower("player",SPELL_POWER_MANA)
         elseif textInfo == 'HEALTH' then
             statusText = (math.floor((UnitHealth('player') * 100 / UnitHealthMax('player')) + 0.5))..'%\n'..UnitHealth('player');       
         elseif hasPet and textInfo == 'PET_MANA' then
-            statusText = (math.floor((UnitMana('pet') * 100 / UnitManaMax('pet')) + 0.5))..'%\n'..UnitMana('pet');        
+            statusText = (math.floor((UnitPower("pet",SPELL_POWER_ENERGY) * 100 / UnitPowerMax("pet",SPELL_POWER_ENERGY)) + 0.5))..'%\n'..UnitPowerMax("pet",SPELL_POWER_ENERGY);        
         elseif hasPet and textInfo == 'PET_HEALTH' then
             statusText = (math.floor((UnitHealth('pet') * 100 / UnitHealthMax('pet')) + 0.5))..'%\n'..UnitHealth('pet');     
         elseif textInfo == 'DRINK_FOOD' then
@@ -838,7 +838,8 @@ end
 
 function Venantes:UpdateActionButtonStatus(buttonId, currentMana)
     local _, actionName, _, _, actionCooldown, actionMana = SphereButtons:ButtonGetActionInfo(self.db.profile['button'..buttonId..'Left']);
-    if actionName == nil then
+    
+	if actionName == nil then
         _, actionName, _, _, actionCooldown, actionMana = SphereButtons:ButtonGetActionInfo(self.db.profile['button'..buttonId..'Right']);        
     end
     local buttonEnabled = true;
@@ -950,8 +951,10 @@ function Venantes:UpdateActions()
     if petTexture ~= nil then
         local  _, _, petTextureFile = string.find(petTexture,'([^\\]+)$');
         if petTextureFile ~= nil then
-            SphereButtons:ButtonSetIcon('PetMenu', petTextureFile);        
-        end
+--            SphereButtons:ButtonSetIcon('PetMenu', petTextureFile); 
+            SphereButtons:ButtonSetIcon('PetMenu', 132194); 			
+		--print("peticon",132194,petTextureFile)
+	   end
     end
     
     self.updatePending = false;
@@ -961,7 +964,8 @@ function Venantes:UpdateMenuButtonSpells(menuId, defaultTexture)
     local optionName = 'remember'..menuId;
     if self.db.profile[optionName] ~= nil then
         local actionTypeRight, actionNameRight, actionTextureRight = SphereCore:Get_ActionInfo('spell', self.db.profile[optionName][1]);
-        if actionTypeRight ~= nil and actionTypeRight == 'spell' and actionNameRight ~= nil then
+        --print (actionTypeRight, actionNameRight, actionTextureRight)
+		if actionTypeRight ~= nil and actionTypeRight == 'spell' and actionNameRight ~= nil then
             SphereButtons:ButtonSetSpell(menuId, 'RightButton', actionNameRight);
             if self.db.profile[optionName][1] ~= self.db.profile[optionName][0] then
                 local actionTypeMiddle, actionNameMiddle = SphereCore:Get_ActionInfo('spell', self.db.profile[optionName][0]);

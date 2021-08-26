@@ -60,7 +60,7 @@ function SphereCore:RegisterSpells(spellList)
     for spellId, spellEn in pairs(spellList) do
 	   --print (spellEn.spell_name, spellEn.id_spell)
 	   local s_name, rank, icon, castTime, minRange, maxRange,spellID = GetSpellInfo(spellEn.id_spell)
-	   print (s_name, spellID)
+	   --print (s_name, spellID)
 	   -- print ("['",spellId,"'] = {'",spellEn,"',",spellID,"}")
 	   self.spellTable[spellId] = {
             --name = L[spellEn],
@@ -86,6 +86,7 @@ function SphereCore:UpdateSpellTable()
 	for i=1, 300, 1 do
 
 		local spellName,subSpellName = GetSpellBookItemName(i, "spell")
+		local spellID = select(2, GetSpellBookItemInfo(i, BOOKTYPE_SPELL))
 		--print (i,spellName,subSpellName, BOOKTYPE_SPELL);
 		if not spellName then
 			do break end
@@ -104,8 +105,28 @@ function SphereCore:UpdateSpellTable()
                 if addSpell then
                     self.spellTable[sphereSpellId].index = i;
                     self.spellTable[sphereSpellId].rank = spellRank;
-                    self.spellTable[sphereSpellId].mana = nil;                        
-                    self.spellTable[sphereSpellId].texture = spellTextureFile;
+                    self.spellTable[sphereSpellId].mana = nil; -- A revoir                       
+                    --self.spellTable[sphereSpellId].texture = GetSpellTexture(spellName);
+					--local spellTexture = GetSpellTexture(i, BOOKTYPE_SPELL);
+					local spellTexture = GetSpellBookItemTexture(i, BOOKTYPE_SPELL);
+					
+					if spellTexture then
+                        local  _, _,spellTextureFile = string.find(spellTexture,'([^\\]+)$');
+                        self.spellTable[sphereSpellId].texture = spellTextureFile;
+                    end
+					
+					print("Update Table",spellTexture,GetSpellTexture(i, BOOKTYPE_SPELL),self.spellTable[sphereSpellId].texture)
+		    	local costTable = GetSpellPowerCost(spellID)
+				for key, costInfo in pairs(costTable) do
+					cost = costInfo.cost
+					--manaStr = costeInfo.name
+					break
+				end
+					
+					
+					self.spellTable[sphereSpellId].manaStr = manaStr;
+					self.spellTable[sphereSpellId].mana = tonumber(cost);
+					
                 end
 
             end
@@ -128,7 +149,8 @@ function SphereCore:Get_ActionInfo(actionType, actionData)
                 else 
                     mana = nil;
                 end
-                return 'spell', name, texture, tooltip, cooldown, mana;
+                --print ('spell', name, "tx",texture, "tt",tooltip, "cd",cooldown, 'mana',mana)
+				return 'spell', name, texture, tooltip, cooldown, mana;
             end
         elseif actionType == 'item' then
             local itemName, _, _, _, itemMinLevel, _, _, _, _, itemTexture = GetItemInfo(actionData);

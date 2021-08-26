@@ -197,14 +197,14 @@ end
 
 function SphereInventory:InventoryGetItemCooldown(itemName)
     if itemName ~= nil and itemName then
-       print ("itemName",itemName,Id) 
+       --print ("itemName",itemName,Id) 
 	local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType,
 	itemSubType, itemStackCount, itemEquipLoc, itemTexture, itemSellPrice =
     GetItemInfo(itemName)
 	local _, _, Color, Ltype, Id, Enchant, Gem1, Gem2, Gem3, Gem4,
     Suffix, Unique, LinkLvl, Name = string.find(itemLink,
     "|?c?f?f?(%x*)|?H?([^:]*):?(%d+):?(%d*):?(%d*):?(%d*):?(%d*):?(%d*):?(%-?%d*):?(%-?%d*):?(%d*):?(%d*):?(%-?%d*)|?h?%[?([^%[%]]*)%]?|?h?|?r?")
-	print ("itemName",itemName,Id)
+	--print ("itemName",itemName,Id)
 		local startTime, duration, enable = GetItemCooldown(Id);
         if enable and startTime ~= nil and startTime > 0 and duration ~= nil and duration > 1 then
             return math.floor(startTime - GetTime() + duration + 0.5);
@@ -216,7 +216,7 @@ end
 function SphereInventory:InventoryGetItemData(groupId) 
     if self.inventoryItems ~= nil and self.inventoryItems[groupId] ~= nil then
         local cooldown = self:InventoryGetItemCooldown(self.inventoryItems[groupId].name); 
-        print(self.inventoryItems[groupId].count, self.inventoryItems[groupId].name, self.inventoryItems[groupId].texture, self.inventoryItems[groupId].spell, cooldown)
+       -- print(self.inventoryItems[groupId].count, self.inventoryItems[groupId].name, self.inventoryItems[groupId].texture, self.inventoryItems[groupId].spell, cooldown)
 		return self.inventoryItems[groupId].count, self.inventoryItems[groupId].name, self.inventoryItems[groupId].texture, self.inventoryItems[groupId].spell, cooldown;
     else
         return nil;
@@ -228,7 +228,7 @@ function SphereInventory:InventoryGetMountData()
     if  self.inventoryItems == nil then
         self.inventoryItems = {};
     end
-    print('self',self)
+
 	if Venantes.playerData.inAQ and self.inventoryItems['MOUNTS_AQ'] ~= nil then
         currentMount = 'MOUNTS_AQ';
     end

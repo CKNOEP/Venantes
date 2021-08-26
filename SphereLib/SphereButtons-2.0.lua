@@ -20,9 +20,7 @@ local SphereCore = LibStub:GetLibrary("SphereCore-3.0");
 
 
 function SphereButtons:ButtonSetup(buttonPrefix, buttonWidgets)
-    print (buttonPrefix, buttonWidgets);
-
-	
+    
 	if self.buttons == nil then
         self.buttons = {};
     end
@@ -35,7 +33,8 @@ function SphereButtons:ButtonSetup(buttonPrefix, buttonWidgets)
     for i=1, table.getn(self.buttons.widgets), 1 do
         -- make clickable
         local button = getglobal(self.buttons.prefix..'Button'..self.buttons.widgets[i]);
-        if button ~= nil then
+        --print (button:GetName())
+		if button ~= nil then
             button:RegisterForClicks('LeftButtonUp', 'MiddleButtonUp', 'RightButtonUp');
             -- artwork texture 
             local textureBorder = button:CreateTexture(self.buttons.prefix..'Button'..self.buttons.widgets[i]..'_Border', 'BORDER');
@@ -134,12 +133,15 @@ function SphereButtons:SphereGetSkinsCount()
 end
 
 function SphereButtons:SphereGetSkinName(skinId)
-    if self.buttons ~= nil and self.buttons.skins ~= nil and self.buttons.skins[skinId] ~= nil then
-        return self.buttons.skins[skinId];
-    elseif self.buttons ~= nil and self.buttons.skins ~= nil and self.buttons.skins[1] ~= nil then
-        return self.buttons.skins[1];    
+    
+	
+	if self.buttons ~= nil and self.buttons.skins ~= nil and self.buttons.skins[skinId] ~= nil then
+
+		return self.buttons.skins[skinId];
+    --elseif self.buttons ~= nil and self.buttons.skins ~= nil and self.buttons.skins[1] ~= nil then
+        --return self.buttons.skins[1];    
     else
-        return 'Solid';
+        --return 'Solid?';
     end
 end
 
@@ -166,7 +168,10 @@ function SphereButtons:ButtonUpdateMenuStatus()
                     local buttonId = menuId..i;
                     -- type, name, texture, tooltip, cooldown, mana
                     local actionType, actionName, _, _, actionCooldown, actionMana = SphereCore:Get_ActionInfo(menuActions[i].type, menuActions[i].data);
-                    if actionType ~= nil and actionName ~= nil then
+					--print (buttonId, actionType, actionName, actionCooldown, actionMana )	
+
+
+				   if actionType ~= nil and actionName ~= nil then
                         local buttonEnabled = true;
                         if actionCooldown and actionCooldown > 0 then
                             cooldownString, cooldownUnit = self:GetFormattedCooldownTime(actionCooldown);
@@ -202,7 +207,7 @@ function SphereButtons:ButtonUpdateMenus()
                 local menuStateHeader = getglobal(self.buttons.prefix..'Button'..menuId..'StateHeader');
                 if menuStateHeader == nil then
                     -- create state header
---                    menuStateHeader = CreateFrame('Frame', self.buttons.prefix..'Button'..menuId..'StateHeader', nil, "SecureHandlerAttributeTemplate SecureHandlerClickTemplate SecureHandlerEnterLeaveTemplate");
+--                  --Introduit a WLTK Patch 3.0--  menuStateHeader = CreateFrame('Frame', self.buttons.prefix..'Button'..menuId..'StateHeader', nil, "SecureHandlerAttributeTemplate SecureHandlerClickTemplate SecureHandlerEnterLeaveTemplate");
                     menuStateHeader = CreateFrame('Frame', self.buttons.prefix..'Button'..menuId..'StateHeader', nil, "SecureHandlerAttributeTemplate SecureHandlerEnterLeaveTemplate");
 
                     menuStateHeader:SetAllPoints(menuButton);     
@@ -285,7 +290,8 @@ function SphereButtons:ButtonUpdateMenus()
                 for i = 1, table.getn(menuActions), 1 do
                     local button = getglobal(self.buttons.prefix..'Button'..menuId..i);
                     local actionType, actionName, actionTexture = SphereCore:Get_ActionInfo(menuActions[i].type, menuActions[i].data);
-                    if actionType ~= nil and actionName ~= nil and actionTexture ~= nil then
+                    --print (actionType, actionName, actionTexture)
+					if actionType ~= nil and actionName ~= nil and actionTexture ~= nil then
                         if button == nil then
                             button = CreateFrame('Button', self.buttons.prefix..'Button'..menuId..i, menuStateHeader, self.buttons.prefix..'DynamicButtonTemplate');
                             -- artwork
@@ -321,10 +327,14 @@ function SphereButtons:ButtonUpdateMenus()
                             button:SetAttribute('type1', actionType);
                             button:SetAttribute(actionType..'1', actionName);
                             buttonTexture = getglobal(button:GetName()..'_Icon');
-                            if not buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..actionTexture) then
+                            
+							if not buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..actionTexture) then
                                 buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\WoWUnknownItem01');
                                 self:DebugTexture(actionTexture);
-                            end
+                            else
+							buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..actionTexture) 
+							--print ("T File path",buttonTexture:GetTextureFilePath())
+							end
                         end           
                     elseif button ~= nil then
                         HideUIPanel(button);
@@ -356,8 +366,11 @@ end
 -- get button action infos
 function SphereButtons:ButtonGetActionInfo(actionId) 
     if self.buttons.actions ~= nil and self.buttons.actions[actionId] ~= nil then
-        return SphereCore:Get_ActionInfo(self.buttons.actions[actionId].type, self.buttons.actions[actionId].data);
-    end
+    
+	--print(SphereCore:Get_ActionInfo(self.buttons.actions[actionId].type, self.buttons.actions[actionId].data))
+    return SphereCore:Get_ActionInfo(self.buttons.actions[actionId].type, self.buttons.actions[actionId].data);
+    
+	end
     return;
 end
 
@@ -375,14 +388,20 @@ end
 -- set button icon
 function SphereButtons:ButtonSetIcon(buttonId, texture)
     local buttonTexture = getglobal(self.buttons.prefix..'Button'..buttonId..'_Icon');
-    if buttonTexture ~= nil then
+    --print ("tex",buttonTexture,texture)
+	if buttonTexture ~= nil then
         if texture == 'DEFAULT' then
             buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\WoWUnknownItem01');
-        elseif not buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..texture) then            
-            buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\WoWUnknownItem01');
-            self:DebugTexture(texture);
-        end
-    end
+      
+		elseif not buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..texture) then            
+            --buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\WoWUnknownItem01');
+            --buttonTexture:SetTexture(texture)
+			self:DebugTexture(texture);
+        else
+		buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..texture)
+		end
+    print("GT ",buttonTexture:GetName(),buttonTexture:GetTexture(),buttonTexture:GetTextureFilePath() )
+	end
 end
 
 
