@@ -115,7 +115,7 @@ function SphereCore:UpdateSpellTable()
                         self.spellTable[sphereSpellId].texture = spellTextureFile;
                     end
 					
-					print("Update Table",spellTexture,GetSpellTexture(i, BOOKTYPE_SPELL),self.spellTable[sphereSpellId].texture)
+					--print("Update Table",spellTexture,GetSpellTexture(i, BOOKTYPE_SPELL),self.spellTable[sphereSpellId].texture)
 		    	local costTable = GetSpellPowerCost(spellID)
 				for key, costInfo in pairs(costTable) do
 					cost = costInfo.cost

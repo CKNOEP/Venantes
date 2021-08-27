@@ -52,6 +52,55 @@ function VenantesConfig_Toggle()
         end
 	end
 end
+VENANTES_SPELLS_TEXTURE = {
+	[132320]="Ability_Stealth",
+	[135942]="Spell_Holy_PrayerOfHealing",
+	[136142]="Spell_Shadow_DarkSummoning",
+	[135834]="Spell_Frost_ChainsOfIce",
+	[132211]="Ability_Hunter_SnakeTrap",
+	[135826]="Spell_Fire_SelfDestruct",
+	[135840]="Spell_Frost_FreezingBreath",
+	[135813]="Spell_Fire_FlameShock",
+	[136076]="Spell_Nature_RavenForm",
+	[132159]="Ability_Hunter_AspectOfTheMonkey",
+	[132160]="Ability_Hunter_AspectoftheViper",
+	[132242]="Ability_Mount_JungleTiger",
+	[132267]="Ability_Mount_WhiteTiger",
+	[132252]="Ability_Mount_PinkTiger",
+	[136074]="Spell_Nature_ProtectionformNature",
+	[132127]="Ability_Druid_FerociousBite",
+	[132111]="Ability_Devour",
+	[132176]="Ability_Hunter_KillCommand",
+	[132179]="Ability_Hunter_MendPet",
+	[132150]="Ability_EyeOfTheOwl",
+	[132161]="Ability_Hunter_BeastCall",
+	[132163]="Ability_Hunter_BeastSoothe",
+	[136095]="Spell_Nature_SpiritWolf",
+	[132165]="Ability_Hunter_BeastTraining",
+	[132164]="Ability_Hunter_BeastTaming",
+	[132270]="Ability_Physical_Taunt",
+	[132162]="Ability_Hunter_BeastCall02",
+}
+
+
+function Venantes:Get_Texture_Path(array, texture)
+    --print (array , texture)
+	for k, v in pairs(array) do
+        if type(v) == "table" then
+            --print(k,v, "contains:")
+            PrintArray(v)           
+        else
+            if k == tonumber(texture) then
+			--print(v,k,texture)
+			return v
+			--else
+			end
+			
+		end
+    end
+end
+
+
 
 VENANTES_SPELLS = {        
 ['HUNTER_SHOT_MULTI'] = 		{spell_name = 'Multi-Shot',				id_spell = 27021 },
@@ -454,7 +503,7 @@ end
 
 -- tooltip functions
 function Venantes:ShowTooltip(element, buttonId, anchor)
-   -- print(self,element, buttonId, anchor)
+    print(self,element, buttonId, anchor)
 	if not self.db.profile.buttonTooltips then
         return
     end

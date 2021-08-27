@@ -14,20 +14,21 @@ if not SphereButtons then  return end -- already loaded and no upgrade necessary
 local SphereCore = LibStub:GetLibrary("SphereCore-3.0");
 
 --SphereButtons =  {}
+-- icon texture path table
 
 
 -- button setup and positions
 
 
 function SphereButtons:ButtonSetup(buttonPrefix, buttonWidgets)
-    
+    --setup des boutons autour de la sphere
 	if self.buttons == nil then
         self.buttons = {};
     end
     self.buttons.prefix = buttonPrefix;
     self.buttons.widgets = buttonWidgets;
-    --self.buttons.skin = self:SphereGetSkinName(Venantes.db.profile.sphereSkin);
-	self.buttons.skin = self:SphereGetSkinName(1);
+    self.buttons.skin = self:SphereGetSkinName(Venantes.db.profile.sphereSkin);
+	--self.buttons.skin = self:SphereGetSkinName(1);
     
     getglobal(self.buttons.prefix..'Sphere'):RegisterForClicks('LeftButtonUp', 'MiddleButtonUp', 'RightButtonUp');
     for i=1, table.getn(self.buttons.widgets), 1 do
@@ -332,8 +333,25 @@ function SphereButtons:ButtonUpdateMenus()
                                 buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\WoWUnknownItem01');
                                 self:DebugTexture(actionTexture);
                             else
-							buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..actionTexture) 
+							--buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..actionTexture) 
 							--print ("T File path",buttonTexture:GetTextureFilePath())
+							local str = buttonTexture:GetTextureFilePath()
+							if strmatch(str, "^%-?[%d%.]+%d$") then 
+							--print("String") 
+							else
+							--print("integer")
+							local Bt_Texture = Venantes:Get_Texture_Path(VENANTES_SPELLS_TEXTURE,actionTexture)
+							print(actionTexture,Bt_Texture,actionTexture)
+							if Bt_Texture then 
+							buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..Bt_Texture) 
+							end
+							
+							--buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..Texture) 
+							--print(buttonTexture:GetTextureFilePath())
+							end
+							
+							
+							
 							end
                         end           
                     elseif button ~= nil then
@@ -395,12 +413,14 @@ function SphereButtons:ButtonSetIcon(buttonId, texture)
       
 		elseif not buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..texture) then            
             --buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\WoWUnknownItem01');
-            --buttonTexture:SetTexture(texture)
+            buttonTexture:SetTexture(texture)
 			self:DebugTexture(texture);
         else
-		buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..texture)
+		--buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..texture)
+		buttonTexture:SetTexture(texture)
+		
 		end
-    print("GT ",buttonTexture:GetName(),buttonTexture:GetTexture(),buttonTexture:GetTextureFilePath() )
+    --print("GT ",buttonTexture:GetName(),buttonTexture:GetTexture(),buttonTexture:GetTextureFilePath() )
 	end
 end
 

@@ -218,7 +218,7 @@
     <Button name="VenantesButtonTrapsMenu" inherits="VenantesMenuButtonTemplate">
         <Scripts>
 			<OnEnter>
-				Venantes:ShowTooltip(VenantesButtonTrapsMenu, "TRAPSMENU", "ANCHOR_LEFT");
+			Venantes:ShowTooltip(VenantesButtonTrapsMenu, "TRAPSMENU", "ANCHOR_LEFT");
 			</OnEnter>
 		</Scripts>
 	</Button>
