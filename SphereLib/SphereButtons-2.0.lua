@@ -147,7 +147,8 @@ function SphereButtons:SphereGetSkinName(skinId)
 end
 
 function SphereButtons:ButtonRegisterMenu(menuId, menuActions)
-    if self.buttons == nil then
+    print(menuId, menuActions)
+	if self.buttons == nil then
         self.buttons = {};
     end
     if self.buttons.menus == nil then
@@ -170,7 +171,7 @@ function SphereButtons:ButtonUpdateMenuStatus()
                     -- type, name, texture, tooltip, cooldown, mana
                     local actionType, actionName, _, _, actionCooldown, actionMana = SphereCore:Get_ActionInfo(menuActions[i].type, menuActions[i].data);
 					--print (buttonId, actionType, actionName, actionCooldown, actionMana )	
-
+					
 
 				   if actionType ~= nil and actionName ~= nil then
                         local buttonEnabled = true;
@@ -291,10 +292,11 @@ function SphereButtons:ButtonUpdateMenus()
                 for i = 1, table.getn(menuActions), 1 do
                     local button = getglobal(self.buttons.prefix..'Button'..menuId..i);
                     local actionType, actionName, actionTexture = SphereCore:Get_ActionInfo(menuActions[i].type, menuActions[i].data);
-                    --print (actionType, actionName, actionTexture)
+                   -- print (actionType, actionName, actionTexture)
 					if actionType ~= nil and actionName ~= nil and actionTexture ~= nil then
                         if button == nil then
-                            button = CreateFrame('Button', self.buttons.prefix..'Button'..menuId..i, menuStateHeader, self.buttons.prefix..'DynamicButtonTemplate');
+                           print ("D", self.buttons.prefix..'DynamicButtonTemplate')
+							button = CreateFrame('Button', self.buttons.prefix..'Button'..menuId..i, menuStateHeader, self.buttons.prefix..'DynamicButtonTemplate');
                             -- artwork
                             local textureBorder = button:CreateTexture(self.buttons.prefix..'Button'..menuId..i..'_Border', 'BORDER');
                             textureBorder:SetWidth(button:GetWidth());
@@ -341,7 +343,7 @@ function SphereButtons:ButtonUpdateMenus()
 							else
 							--print("integer")
 							local Bt_Texture = Venantes:Get_Texture_Path(VENANTES_SPELLS_TEXTURE,actionTexture)
-							print(actionTexture,Bt_Texture,actionTexture)
+							--print(actionTexture,Bt_Texture,actionTexture)
 							if Bt_Texture then 
 							buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..Bt_Texture) 
 							end
@@ -391,8 +393,8 @@ function SphereButtons:ButtonGetActionInfo(actionId)
 	end
     return;
 end
-
-function SphereButtons:ButtonSetCaption(buttonId, text)
+-- permet d'afficher le temps restant du CD dans le bouton
+function SphereButtons:ButtonSetCaption(buttonId, text) 
     local buttonCaption = getglobal(self.buttons.prefix..'Button'..buttonId..'_Caption');
     if buttonCaption ~= nil then
         if text ~= nil then
@@ -400,7 +402,8 @@ function SphereButtons:ButtonSetCaption(buttonId, text)
         else
             buttonCaption:SetText('');        
         end
-    end
+    --print (buttonId, text, buttonCaption:GetText())
+	end
 end
 
 -- set button icon
@@ -620,7 +623,8 @@ function SphereButtons:ButtonSetDragable()
             else
                 -- enable dragging
                 button:RegisterForDrag('LeftButton');
-            end
+				print(button:GetName(),"Drag Left But")
+			end
         end
     end
 end

@@ -60,7 +60,7 @@ function SphereCore:RegisterSpells(spellList)
     for spellId, spellEn in pairs(spellList) do
 	   --print (spellEn.spell_name, spellEn.id_spell)
 	   local s_name, rank, icon, castTime, minRange, maxRange,spellID = GetSpellInfo(spellEn.id_spell)
-	   --print (s_name, spellID)
+	   print (s_name, rank, icon, castTime, minRange, maxRange,spellID)
 	   -- print ("['",spellId,"'] = {'",spellEn,"',",spellID,"}")
 	   self.spellTable[spellId] = {
             --name = L[spellEn],
@@ -70,12 +70,16 @@ function SphereCore:RegisterSpells(spellList)
             texture = nil,
         }
 		
-        if name ~= nil then
+        if s_name ~= nil then
             self.spellTableRevIndex[s_name] = spellId;
         else
             self.spellTableRevIndex[s_name] = spellId;        
         end
-    end
+		--debug
+		local count = 0
+		for _ in pairs(self.spellTableRevIndex) do count = count + 1 end
+		--print(count)
+	end
 end
 
 -- gather spell information

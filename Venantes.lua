@@ -18,8 +18,9 @@ Venantes = LibStub("AceAddon-3.0"):NewAddon(
 )
 
 local L = LibStub("AceLocale-3.0"):GetLocale('Venantes');
-local SphereButtons = LibStub:GetLibrary("SphereButtons-2.0");
+
 local SphereCore = LibStub:GetLibrary("SphereCore-3.0");
+local SphereButtons = LibStub:GetLibrary("SphereButtons-2.0");
 local SphereInventory = LibStub:GetLibrary("SphereInventory-2.0");
 
 -- configuration
@@ -87,13 +88,13 @@ function Venantes:Get_Texture_Path(array, texture)
     --print (array , texture)
 	for k, v in pairs(array) do
         if type(v) == "table" then
-            --print(k,v, "contains:")
+           
             PrintArray(v)           
         else
             if k == tonumber(texture) then
-			--print(v,k,texture)
+			
 			return v
-			--else
+			--else nothing
 			end
 			
 		end
@@ -503,7 +504,7 @@ end
 
 -- tooltip functions
 function Venantes:ShowTooltip(element, buttonId, anchor)
-    print(self,element, buttonId, anchor)
+    print(element, buttonId, anchor)
 	if not self.db.profile.buttonTooltips then
         return
     end
@@ -625,21 +626,26 @@ function Venantes:ShowTooltip(element, buttonId, anchor)
                 GameTooltip:AddLine(self:GetTooltipCooldownStr(cooldownString, cooldownUnit), 0.7, 0.7, 0.7);
             end
         end
-    elseif buttonId == 'ATTRIBUTES' then
-        local buttonType = element:GetAttribute('type1');
-        if buttonType ~= nil then
+    elseif buttonId == 'ATTRIBUTES' then -- button des sous menus
+        local buttonType = element:GetAttribute('type1'); --buttonType = spell
+		
+		if buttonType ~= nil then
             local buttonAction = element:GetAttribute(buttonType..'1');
-            if buttonType == 'spell' then
+            print (buttonAction,  'OK')
+			if buttonType == 'spell' then
                 -- spell name to venantes spell id
-                if self.spellTableRevIndex ~= nil and self.spellTableRevIndex[buttonAction] ~= nil then
+                if SphereCore.spellTableRevIndex ~= nil and SphereCore.spellTableRevIndex[buttonAction] ~= nil then
                     -- venantes spell id to spell data
-                    local spellData = self.spellTable[self.spellTableRevIndex[buttonAction]];
-                    -- check data and set tooltip
+                    local spellData = SphereCore.spellTable[SphereCore.spellTableRevIndex[buttonAction]];
+                    print (spellData.index)
+					-- check data and set tooltip
                     if spellData ~= nil and spellData.index ~= nil and spellData.index > 0 then
-                        GameTooltip:SetSpell(spellData.index, BOOKTYPE_SPELL);
+                        
+						GameTooltip:SetSpellBookItem(spellData.index, BOOKTYPE_SPELL);
                     end
                 end
-            end
+            
+			end
         end
     elseif buttonId == 'PETMENU' then
         GameTooltip:AddLine(L['BUTTON_'..buttonId]);
