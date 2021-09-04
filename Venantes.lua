@@ -1248,13 +1248,14 @@ function Venantes:GetTooltipCooldownStr(cooldownString, cooldownUnit)
     end
 end
 function Venantes:OnDragStart(element)
-    print ("drag",element)
+   print ("drag start",element)
 	if not InCombatLockdown() then
         element:StartMoving();
     end
 end
 function Venantes:OnDragStop(element)
-    element:StopMovingOrSizing();
+        print ("drag stop",element)
+	element:StopMovingOrSizing();
     if not InCombatLockdown() then
         if (not Venantes.db.profile.buttonLocking) and Venantes.db.profile.buttonsUseGrid then
             local gridSize = 10;        

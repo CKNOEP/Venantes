@@ -43,10 +43,13 @@
 				<!--Venantes:OnDragStart(VenantesButtonTemplate);-->
 			</OnDragStart>
 			<OnDragStop>
-				Venantes:OnDragStop(VenantesButtonTemplate);
+								Venantes:OnDragStop(self);
 			</OnDragStop>
 			<OnMouseUp>
-				Venantes:OnDragStop(VenantesButtonTemplate);
+
+				print (self:GetName());
+				self:StartMoving();
+				Venantes:OnDragStop(self);
 			</OnMouseUp>
         </Scripts>
 		<HighlightTexture file="Interface\AddOns\Venantes\UI\Solid\ButtonHighlight" />
@@ -88,10 +91,10 @@
 				GameTooltip:Hide();
 			</OnLeave>
 			<OnDragStart>
-				Venantes:OnDragStart(VenantesMenuButtonTemplate);
+				Venantes:OnDragStart(self);
 			</OnDragStart>
 			<OnDragStop>
-				Venantes:OnDragStop(VenantesMenuButtonTemplate);
+				Venantes:OnDragStop(self);
 			</OnDragStop>
         </Scripts>
 		<HighlightTexture file="Interface\AddOns\Venantes\UI\Solid\ButtonHighlight" />
@@ -160,10 +163,10 @@
 
 			</OnDragStart>
 			<OnDragStop>
-				Venantes:OnDragStop(VenantesSphere);
+				Venantes:OnDragStop(self);
 			</OnDragStop>
 			<OnMouseUp>
-				Venantes:OnDragStop(VenantesSphere);
+				Venantes:OnDragStop(self);
 			</OnMouseUp>
 		</Scripts>
 	</Button>  

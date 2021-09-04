@@ -209,8 +209,9 @@ function SphereButtons:ButtonUpdateMenus()
                 local menuStateHeader = getglobal(self.buttons.prefix..'Button'..menuId..'StateHeader');
                 if menuStateHeader == nil then
                     -- create state header
---                  --Introduit a WLTK Patch 3.0--  menuStateHeader = CreateFrame('Frame', self.buttons.prefix..'Button'..menuId..'StateHeader', nil, "SecureHandlerAttributeTemplate SecureHandlerClickTemplate SecureHandlerEnterLeaveTemplate");
-                    menuStateHeader = CreateFrame('Frame', self.buttons.prefix..'Button'..menuId..'StateHeader', nil, "SecureHandlerAttributeTemplate SecureHandlerEnterLeaveTemplate");
+                    --Introduit a WLTK Patch 3.0 - SecureHandlerClickTemplate
+				--  menuStateHeader = CreateFrame('Frame', self.buttons.prefix..'Button'..menuId..'StateHeader', nil, "SecureHandlerAttributeTemplate SecureHandlerClickTemplate SecureHandlerEnterLeaveTemplate");
+                    menuStateHeader = CreateFrame('Frame', self.buttons.prefix..'Button'..menuId..'StateHeader', nil, "SecureHandlerAttributeTemplate SecureHandlerStateTemplate SecureHandlerEnterLeaveTemplate");
 
                     menuStateHeader:SetAllPoints(menuButton);     
                     
