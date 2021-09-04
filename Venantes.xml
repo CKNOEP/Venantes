@@ -37,7 +37,7 @@
 			</OnLeave>
 			<OnDragStart>
 				
-				print (self:GetName());
+				
 				self:StartMoving();
 				
 				<!--Venantes:OnDragStart(VenantesButtonTemplate);-->
@@ -47,8 +47,8 @@
 			</OnDragStop>
 			<OnMouseUp>
 
-				print (self:GetName());
-				self:StartMoving();
+				
+				
 				Venantes:OnDragStop(self);
 			</OnMouseUp>
         </Scripts>

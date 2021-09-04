@@ -94,7 +94,7 @@ function Venantes:Get_Texture_Path(array, texture)
 	for k, v in pairs(array) do
         if type(v) == "table" then
            
-            PrintArray(v)           
+            --PrintArray(v)           
         else
             if k == tonumber(texture) then
 			
@@ -509,7 +509,7 @@ end
 
 -- tooltip functions
 function Venantes:ShowTooltip(element, buttonId, anchor)
-    print(element, buttonId, anchor)
+   -- print(element, buttonId, anchor)
 	if not self.db.profile.buttonTooltips then
         return
     end
@@ -636,13 +636,13 @@ function Venantes:ShowTooltip(element, buttonId, anchor)
 		
 		if buttonType ~= nil then
             local buttonAction = element:GetAttribute(buttonType..'1');
-            print (buttonAction,  'OK')
+            --print (buttonAction,  'OK')
 			if buttonType == 'spell' then
                 -- spell name to venantes spell id
                 if SphereCore.spellTableRevIndex ~= nil and SphereCore.spellTableRevIndex[buttonAction] ~= nil then
                     -- venantes spell id to spell data
                     local spellData = SphereCore.spellTable[SphereCore.spellTableRevIndex[buttonAction]];
-                    print (spellData.index)
+                    --print (spellData.index)
 					-- check data and set tooltip
                     if spellData ~= nil and spellData.index ~= nil and spellData.index > 0 then
                         

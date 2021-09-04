@@ -30,10 +30,10 @@ function SphereButtons:ButtonSetup(buttonPrefix, buttonWidgets)
     self.buttons.skin = self:SphereGetSkinName(Venantes.db.profile.sphereSkin);
 	--self.buttons.skin = self:SphereGetSkinName(1);
     
-    getglobal(self.buttons.prefix..'Sphere'):RegisterForClicks('LeftButtonUp', 'MiddleButtonUp', 'RightButtonUp');
+     _G[self.buttons.prefix..'Sphere']:RegisterForClicks('LeftButtonUp', 'MiddleButtonUp', 'RightButtonUp');
     for i=1, table.getn(self.buttons.widgets), 1 do
         -- make clickable
-        local button = getglobal(self.buttons.prefix..'Button'..self.buttons.widgets[i]);
+        local button = _G[self.buttons.prefix..'Button'..self.buttons.widgets[i]];
         --print (button:GetName())
 		if button ~= nil then
             button:RegisterForClicks('LeftButtonUp', 'MiddleButtonUp', 'RightButtonUp');
@@ -103,13 +103,13 @@ function SphereButtons:SphereSetStatusValues(sphereCircleValue, sphereTextValue)
         elseif sphereCircleValue > 16 then
             sphereCircleValue = 16;        
         end
-        local sphereCircle = getglobal(self.buttons.prefix..'CircleShards');
+        local sphereCircle = _G[self.buttons.prefix..'CircleShards'];
         if sphereCircle ~= nil then
             sphereCircle:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\Shards\\Shard'..sphereCircleValue);
         end
     end
     if sphereTextValue ~= nil then
-        local sphereText = getglobal(self.buttons.prefix..'SphereCaption');
+        local sphereText = _G[self.buttons.prefix..'SphereCaption'];
         if  sphereText ~= nil then
             sphereText:SetText(sphereTextValue);
         end
@@ -146,8 +146,8 @@ function SphereButtons:SphereGetSkinName(skinId)
     end
 end
 
-function SphereButtons:ButtonRegisterMenu(menuId, menuActions)
-    print(menuId, menuActions)
+function SphereButtons:ButtonRegisterMenu(menuId, menuActions)--Boutons Menu autours de la sphère
+    
 	if self.buttons == nil then
         self.buttons = {};
     end
@@ -157,14 +157,14 @@ function SphereButtons:ButtonRegisterMenu(menuId, menuActions)
     self.buttons.menus[menuId] = menuActions;
 end
 
-function SphereButtons:ButtonUpdateMenuStatus() 
+function SphereButtons:ButtonUpdateMenuStatus() -- Petits boutons des menus
     if self.buttons ~= nil and self.buttons.menus ~= nil then
         local currentMana = UnitPower("player", SPELL_POWER_MANA);
         if currentMana == nil then
             currentMana = 0;
         end
         for menuId, menuActions in pairs(self.buttons.menus) do
-            local menuButton = getglobal(self.buttons.prefix..'Button'..menuId);
+            local menuButton = _G[self.buttons.prefix..'Button'..menuId];
             if menuButton ~= nil then            
                 for i = 1, table.getn(menuActions), 1 do
                     local buttonId = menuId..i;
@@ -200,18 +200,19 @@ function SphereButtons:ButtonUpdateMenuStatus()
         end
     end
 end
-
+ 
 function SphereButtons:ButtonUpdateMenus()
     if self.buttons ~= nil and self.buttons.menus ~= nil then
         for menuId, menuActions in pairs(self.buttons.menus) do
-            local menuButton = getglobal(self.buttons.prefix..'Button'..menuId);
+            local menuButton = _G[self.buttons.prefix..'Button'..menuId];
             if menuButton ~= nil then
-                local menuStateHeader = getglobal(self.buttons.prefix..'Button'..menuId..'StateHeader');
-                if menuStateHeader == nil then
+                local menuStateHeader = _G[self.buttons.prefix..'Button'..menuId..'StateHeader'];
+                print (menuStateHeader)
+				if menuStateHeader == nil then -- init
                     -- create state header
                     --Introduit a WLTK Patch 3.0 - SecureHandlerClickTemplate
 				--  menuStateHeader = CreateFrame('Frame', self.buttons.prefix..'Button'..menuId..'StateHeader', nil, "SecureHandlerAttributeTemplate SecureHandlerClickTemplate SecureHandlerEnterLeaveTemplate");
-                    menuStateHeader = CreateFrame('Frame', self.buttons.prefix..'Button'..menuId..'StateHeader', nil, "SecureHandlerAttributeTemplate SecureHandlerStateTemplate SecureHandlerEnterLeaveTemplate");
+                    menuStateHeader = CreateFrame('Frame', self.buttons.prefix..'Button'..menuId..'StateHeader', nil,  'SecureHandlerStateTemplate SecureHandlerAttributeTemplate');
 
                     menuStateHeader:SetAllPoints(menuButton);     
                     
@@ -245,11 +246,13 @@ function SphereButtons:ButtonUpdateMenus()
                 elseif Venantes.db.profile.menuCloseTimeout and Venantes.db.profile.menuCloseTimeout > 0 then
                     menuButton:SetAttribute('onmouseupbutton1', 'mup');                
                     menuStateHeader:SetAttribute('delaytimemap-anchor-mouseup', Venantes.db.profile.menuCloseTimeout);
-                else
+                print (Venantes.db.profile.menuCloseTimeout , Venantes.db.profile.menuCloseTimeout) 
+				else
                     menuButton:SetAttribute('onmouseupbutton1', '');                
                 end                
                 
-                local relPoint = menuButton;
+                
+				local relPoint = menuButton;
                 local relOffsetY = 0;
                 local relFactorY = 0;
                 local relReverseY = false;
@@ -291,12 +294,12 @@ function SphereButtons:ButtonUpdateMenus()
                     end                
                 end
                 for i = 1, table.getn(menuActions), 1 do
-                    local button = getglobal(self.buttons.prefix..'Button'..menuId..i);
+                    local button = _G[self.buttons.prefix..'Button'..menuId..i];
                     local actionType, actionName, actionTexture = SphereCore:Get_ActionInfo(menuActions[i].type, menuActions[i].data);
                    -- print (actionType, actionName, actionTexture)
 					if actionType ~= nil and actionName ~= nil and actionTexture ~= nil then
                         if button == nil then
-                           print ("D", self.buttons.prefix..'DynamicButtonTemplate')
+                           --print ("D", self.buttons.prefix..'DynamicButtonTemplate')
 							button = CreateFrame('Button', self.buttons.prefix..'Button'..menuId..i, menuStateHeader, self.buttons.prefix..'DynamicButtonTemplate');
                             -- artwork
                             local textureBorder = button:CreateTexture(self.buttons.prefix..'Button'..menuId..i..'_Border', 'BORDER');
@@ -309,7 +312,7 @@ function SphereButtons:ButtonUpdateMenus()
                             menuStateHeader:SetAttribute('addchild', button);
                         end
                         -- set skin
-                        getglobal(self.buttons.prefix..'Button'..menuId..i..'_Border'):SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\ButtonBorder');
+                        _G[self.buttons.prefix..'Button'..menuId..i..'_Border']:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\ButtonBorder');
                         button:SetHighlightTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\ButtonHighlight');
                         button:SetAlpha(Venantes.db.profile.buttonOpacity / 100);
                             
@@ -330,7 +333,7 @@ function SphereButtons:ButtonUpdateMenus()
                         if actionType == 'spell' or actionType == 'item' then
                             button:SetAttribute('type1', actionType);
                             button:SetAttribute(actionType..'1', actionName);
-                            buttonTexture = getglobal(button:GetName()..'_Icon');
+                            buttonTexture = _G[button:GetName()..'_Icon'];
                             
 							if not buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..actionTexture) then
                                 buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\WoWUnknownItem01');
@@ -356,9 +359,11 @@ function SphereButtons:ButtonUpdateMenus()
 							
 							
 							end
-                        end           
+                        end
+					HideUIPanel(button);
                     elseif button ~= nil then
-                        HideUIPanel(button);
+                        print ("hide", button:GetName())
+						HideUIPanel(button);
                     end
                 end
             end
@@ -396,7 +401,7 @@ function SphereButtons:ButtonGetActionInfo(actionId)
 end
 -- permet d'afficher le temps restant du CD dans le bouton
 function SphereButtons:ButtonSetCaption(buttonId, text) 
-    local buttonCaption = getglobal(self.buttons.prefix..'Button'..buttonId..'_Caption');
+    local buttonCaption = _G[self.buttons.prefix..'Button'..buttonId..'_Caption'];
     if buttonCaption ~= nil then
         if text ~= nil then
             buttonCaption:SetText(text);
@@ -409,7 +414,7 @@ end
 
 -- set button icon
 function SphereButtons:ButtonSetIcon(buttonId, texture)
-    local buttonTexture = getglobal(self.buttons.prefix..'Button'..buttonId..'_Icon');
+    local buttonTexture = _G[self.buttons.prefix..'Button'..buttonId..'_Icon'];
     --print ("tex",buttonTexture,texture)
 	if buttonTexture ~= nil then
         if texture == 'DEFAULT' then
@@ -431,7 +436,7 @@ end
 
 -- set button item action
 function SphereButtons:ButtonSetItem(buttonId, mouseButton, itemName) 
-    local button = getglobal(self.buttons.prefix..'Button'..buttonId);
+    local button = _G[self.buttons.prefix..'Button'..buttonId];
     if button ~= nil then
         if mouseButton == 'LeftButton' then
             button:SetAttribute('type1', 'item');
@@ -448,7 +453,7 @@ end
 
 -- set button spell action
 function SphereButtons:ButtonSetSpell(buttonId, mouseButton, spellName) 
-    local button = getglobal(self.buttons.prefix..'Button'..buttonId);
+    local button = _G[self.buttons.prefix..'Button'..buttonId];
     if button ~= nil then
         if mouseButton == 'LeftButton' then
             button:SetAttribute('type1', 'spell');
@@ -465,7 +470,7 @@ end
 
 -- set button macro action
 function SphereButtons:ButtonSetMacro(buttonId, mouseButton, macroText) 
-    local button = getglobal(self.buttons.prefix..'Button'..buttonId);
+    local button = _G[self.buttons.prefix..'Button'..buttonId];
     if button ~= nil then
         if mouseButton == 'LeftButton' then
             button:SetAttribute('type1', 'macro');
@@ -482,7 +487,7 @@ end
 
 -- set sphere item action
 function SphereButtons:SphereSetItem(mouseButton, itemName) 
-    local sphere = getglobal(self.buttons.prefix..'Sphere');
+    local sphere = _G[self.buttons.prefix..'Sphere'];
     if sphere ~= nil then
         if mouseButton == 'LeftButton' then
             sphere:SetAttribute('type1', 'item');
@@ -499,7 +504,7 @@ end
 
 -- set sphere spell action
 function SphereButtons:SphereSetSpell(mouseButton, spellName) 
-    local sphere = getglobal(self.buttons.prefix..'Sphere');
+    local sphere = _G[self.buttons.prefix..'Sphere'];
     if sphere ~= nil then
         if mouseButton == 'LeftButton' then
             sphere:SetAttribute('type1', 'spell');
@@ -516,7 +521,7 @@ end
 
 -- set button enabled/disabled
 function SphereButtons:ButtonSetStatus(buttonId, enabled)
-    local buttonTexture = getglobal(self.buttons.prefix..'Button'..buttonId..'_Icon');
+    local buttonTexture = _G[self.buttons.prefix..'Button'..buttonId..'_Icon'];
     if buttonTexture ~= nil then
         if enabled then
             buttonTexture:SetVertexColor(1.0, 1.0, 1.0);
@@ -530,24 +535,26 @@ end
 function SphereButtons:ButtonSetPositions()
     self.buttons.skin = self:SphereGetSkinName(Venantes.db.profile.sphereSkin);
     local scale = Venantes.db.profile.sphereScale / 100;
-    local sphere = getglobal(self.buttons.prefix..'Sphere');
+    local sphere = _G[self.buttons.prefix..'Sphere'];
     sphere:SetScale(scale);
     sphere:SetAlpha(Venantes.db.profile.sphereOpacity / 100);
 
-    getglobal(self.buttons.prefix..'Sphere_Border'):SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\SphereBorder');
-    getglobal(self.buttons.prefix..'Sphere_Icon'):SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\SphereIcon');
-    getglobal(self.buttons.prefix..'Sphere_Highlight'):SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\SphereHighlight');
+    _G[self.buttons.prefix..'Sphere_Border']:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\SphereBorder');
+    _G[self.buttons.prefix..'Sphere_Icon']:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\SphereIcon');
+    _G[self.buttons.prefix..'Sphere_Highlight']:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\SphereHighlight');
     
-    getglobal(self.buttons.prefix..'Circle'):SetScale(scale);
-    getglobal(self.buttons.prefix..'Circle'):SetAlpha(Venantes.db.profile.sphereOpacity / 100);--(Venantes.db.profile.sphereOpacity / 100);
+    _G[self.buttons.prefix..'Circle']:SetScale(scale);
+    _G[self.buttons.prefix..'Circle']:SetAlpha(Venantes.db.profile.sphereOpacity / 100);--(Venantes.db.profile.sphereOpacity / 100);
     local currentPos = 0;
     for i=1, table.getn(self.buttons.widgets), 1 do
-        local button = getglobal(self.buttons.prefix..'Button'..self.buttons.widgets[i]);
+        local button = _G[self.buttons.prefix..'Button'..self.buttons.widgets[i]];
         if button ~= nil then
             if Venantes.db.profile['button'..self.buttons.widgets[i]..'Visible'] then
                 self:ButtonSetPosition(self.buttons.widgets[i], currentPos);
                 currentPos = currentPos + 1;
-                ShowUIPanel(button);
+               -- print("Show ui pannel button",button)
+				ShowUIPanel(button);
+				
             else
                 HideUIPanel(button);
             end
@@ -570,9 +577,9 @@ function SphereButtons:ButtonSetPosition(buttonName, buttonPos)
         rotationOffset = 126;
     end
     
-    local button = getglobal(self.buttons.prefix..'Button'..buttonName);
+    local button = _G[self.buttons.prefix..'Button'..buttonName];
     if button ~= nil then
-        getglobal(self.buttons.prefix..'Button'..buttonName..'_Border'):SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\ButtonBorder');
+        _G[self.buttons.prefix..'Button'..buttonName..'_Border']:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\ButtonBorder');
         button:SetHighlightTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\ButtonHighlight');
         button:SetAlpha(Venantes.db.profile.buttonOpacity / 100);
         if Venantes.db.profile.buttonLocking then
@@ -609,14 +616,14 @@ end
 function SphereButtons:ButtonSetDragable()
     if Venantes.db.profile.sphereLocking then
         -- disable sphere
-        getglobal(self.buttons.prefix..'Sphere'):RegisterForDrag('');
+        _G[self.buttons.prefix..'Sphere']:RegisterForDrag('');
     else
         -- enable sphere
-        getglobal(self.buttons.prefix..'Sphere'):RegisterForDrag('LeftButton');
+        _G[self.buttons.prefix..'Sphere']:RegisterForDrag('LeftButton');
     end
     -- setup buttons
     for i=1, table.getn(self.buttons.widgets), 1 do
-        local button = getglobal(self.buttons.prefix..'Button'..self.buttons.widgets[i]);
+        local button = _G[self.buttons.prefix..'Button'..self.buttons.widgets[i]];
         if button ~= nil then
             if Venantes.db.profile.sphereLocking or Venantes.db.profile.buttonLocking then
                 -- disable
@@ -624,7 +631,7 @@ function SphereButtons:ButtonSetDragable()
             else
                 -- enable dragging
                 button:RegisterForDrag('LeftButton');
-				print(button:GetName(),"Drag Left But")
+				--print(button:GetName(),"Drag Left But")
 			end
         end
     end
@@ -632,7 +639,7 @@ end
 
 
 function SphereButtons:OnDragStart(element)
-    print ("drag",element)
+    --print ("drag",element)
 	if not InCombatLockdown() then
         element:StartMoving();
     end

@@ -60,7 +60,7 @@ function SphereCore:RegisterSpells(spellList)
     for spellId, spellEn in pairs(spellList) do
 	   --print (spellEn.spell_name, spellEn.id_spell)
 	   local s_name, rank, icon, castTime, minRange, maxRange,spellID = GetSpellInfo(spellEn.id_spell)
-	   print (s_name, rank, icon, castTime, minRange, maxRange,spellID)
+	   --print (s_name, rank, icon, castTime, minRange, maxRange,spellID)
 	   -- print ("['",spellId,"'] = {'",spellEn,"',",spellID,"}")
 	   self.spellTable[spellId] = {
             --name = L[spellEn],
