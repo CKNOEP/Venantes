@@ -55,6 +55,11 @@ function VenantesConfig_Toggle()
 end
 VENANTES_SPELLS_TEXTURE = {
 	[132320]="Ability_Stealth",
+	[132328]="Ability_tracking",
+	[136217]="Spell_shadow_summonfelhunter",
+	[134153]="Inv_misc_head_dragon_01",
+	[135861]="Spell_frost_summonwaterelemental",
+	[132275]="Ability_racial_avatar",	
 	[135942]="Spell_Holy_PrayerOfHealing",
 	[136142]="Spell_Shadow_DarkSummoning",
 	[135834]="Spell_Frost_ChainsOfIce",
