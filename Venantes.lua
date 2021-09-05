@@ -8,7 +8,8 @@
 --   Necrosis LdC by Lomig and Nyx (http://necrosis.larmes-cenarius.net)
 --   Original Necrosis Idea : Infernal (http://www.revolvus.com/games/interface/necrosis/)
 ------------------------------------------------------------------------------------------------------
-
+local _ = ...
+local addonName = ...
 
 Venantes = LibStub("AceAddon-3.0"):NewAddon(
 "Venantes",
@@ -16,6 +17,7 @@ Venantes = LibStub("AceAddon-3.0"):NewAddon(
 "AceConsole-3.0",
 "AceHook-3.0"
 )
+
 
 local L = LibStub("AceLocale-3.0"):GetLocale('Venantes');
 
@@ -1021,9 +1023,11 @@ function Venantes:UpdateActions()
 end
 
 function Venantes:UpdateMenuButtonSpells(menuId, defaultTexture)
-    local optionName = 'remember'..menuId;
+   -- print(menuId, defaultTexture)
+	local optionName = 'remember'..menuId;
     if self.db.profile[optionName] ~= nil then
-        local actionTypeRight, actionNameRight, actionTextureRight = SphereCore:Get_ActionInfo('spell', self.db.profile[optionName][1]);
+        --print(menuId, defaultTexture)
+		local actionTypeRight, actionNameRight, actionTextureRight = SphereCore:Get_ActionInfo('spell', self.db.profile[optionName][1]);
         --print (actionTypeRight, actionNameRight, actionTextureRight)
 		if actionTypeRight ~= nil and actionTypeRight == 'spell' and actionNameRight ~= nil then
             SphereButtons:ButtonSetSpell(menuId, 'RightButton', actionNameRight);
@@ -1042,18 +1046,28 @@ function Venantes:UpdateMenuButtonSpells(menuId, defaultTexture)
             SphereButtons:ButtonSetSpell(menuId, 'MiddleButton', '');           
         end
         if actionTextureRight then
-            SphereButtons:ButtonSetIcon(menuId, actionTextureRight);
-        else 
-            SphereButtons:ButtonSetIcon(menuId, defaultTexture);        
-        end
+            --SphereButtons:ButtonSetIcon(menuId, actionTextureRight);
+        local buttonMenuTexture = _G[self.buttons.prefix..'Button'..menuId..'_Icon'];
+--		buttonMenuTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..defaultTexture)
+		buttonMenuTexture:SetTexture('Interface\\AddOns\\'..addonName..'\\UI\\Icons\\'..'Spell_Frost_ChainsOfIce')		
+		
+		else 
+           -- SphereButtons:ButtonSetIcon(C, defaultTexture);        
+		local buttonMenuTexture = _G[addonName..'Button'..menuId..'_Icon'];
+		buttonMenuTexture:SetTexture('Interface\\AddOns\\'..addonName..'\\UI\\Icons\\'..defaultTexture)		
+        
+		end
     end
 end
 
 function Venantes:UpdateItemButton(buttonId, groupIdLeft, groupIdRight, defaultTexture)
-    
+   
 	local _, itemLeftName, itemLeftTexture  = SphereInventory:InventoryGetItemData(groupIdLeft);
     local _, itemRightName, itemRightTexture  = SphereInventory:InventoryGetItemData(groupIdRight);
-    if itemLeftName ~= nil then
+     print("b_ID ",buttonId, groupIdLeft,itemLeftName,itemLeftTexture, groupIdRight,itemRightName, itemRightTexture, defaultTexture)
+	
+	
+	if itemLeftName ~= nil then
         SphereButtons:ButtonSetStatus(buttonId, true);
         SphereButtons:ButtonSetIcon(buttonId, itemLeftTexture);
         SphereButtons:ButtonSetItem(buttonId, 'LeftButton', itemLeftName);
@@ -1070,8 +1084,8 @@ function Venantes:UpdateItemButton(buttonId, groupIdLeft, groupIdRight, defaultT
             SphereButtons:ButtonSetItem(buttonId, 'RightButton', itemRightName);
         else
             SphereButtons:ButtonSetStatus(buttonId, false);
-            SphereButtons:ButtonSetIcon(buttonId, defaultTexture);
-            SphereButtons:ButtonSetItem(buttonId, 'RightButton', '');   
+			SphereButtons:ButtonSetIcon(buttonId, defaultTexture);
+			SphereButtons:ButtonSetItem(buttonId, 'RightButton', '');   
         end
     end
 end

@@ -33,7 +33,8 @@ function SphereCore:InitPlayerInfos()
         ammoTrown = 'Thrown',
         zoneAQ = 'Ahn\'Qiraj',
         zoneOutlands = {'Blade\'s Edge Mountains', 'Hellfire Peninsula', 'Nagrand', 'Netherstorm', 'Shadowmoon Valley', 'Shattrath City', 'Terokkar Forest', 'Zangarmarsh'},
-        mana = 'Mana',        
+        zoneOutlandsID = {1949, 1944, 1951, 1953, 1948, 1955, 1952, 1946},
+		mana = 'Mana',        
     }
     if Venantes.playerData.language == 'deDE' then
         self.identStrings.ammoTrown = 'Wurf';
@@ -344,12 +345,31 @@ function SphereCore:MountZoneInformation()
         Venantes.playerData.inAQ = false;
         Venantes.playerData.inOutlands = false;
         for _, outlandsZone in pairs(self.identStrings.zoneOutlands) do
+			
+			mapID = C_Map.GetBestMapForUnit("player")
+			mapname = C_Map.GetMapInfo(mapID).name
+			
+			
             if outlandsZone == zoneName then
                 Venantes.playerData.inOutlands = true;
                 return;
             end
         end
-    end  
+		for _, outlandsZone in pairs(self.identStrings.zoneOutlandsID) do
+			
+			mapID = C_Map.GetBestMapForUnit("player")
+			mapname = C_Map.GetMapInfo(mapID).name
+	
+
+            if outlandsZone == mapID then
+                Venantes.playerData.inOutlands = true;
+                print ("Outland" , Venantes.playerData.inOutlands)
+				return;
+            end
+        end	
+	
+	
+	end  
 end
 
 function SphereCore:UpdateAmmoItem()

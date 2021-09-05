@@ -1,0 +1,15 @@
+﻿## Interface: 90002
+## Title: Lib: PeriodicTable-3.1
+## Notes: Library of compressed itemid sets.
+## Author: Elkano, MuffinManKen, Nymbia
+## Version: v3.3.0.@project-revision@
+## LoadOnDemand: 1
+
+## X-Date: @project-date-iso@
+## X-Website: http://www.wowace.com/projects/libperiodictable-3-1/
+## X-Category: Library
+## X-License: LGPL v2.1
+
+LibStub\LibStub.lua
+LibPeriodicTable-3.1\LibPeriodicTable-3.1.lua
+modules.xml

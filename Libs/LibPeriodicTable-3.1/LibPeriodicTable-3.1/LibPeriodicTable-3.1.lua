@@ -285,12 +285,11 @@ function PT3:ItemInSet(item, set)
 	assert(type(item) == "number" or type(item) == "string", "Invalid arg1: item must be a number or item link")
 	assert(type(set) == "string", "Invalid arg2: set must be a string")
 	set = fixSetName(set)
-	
 	-- Type the passed item out to an itemid.
 	item = getItemID(item)
 	assert(item ~= 0,"Invalid arg1: invalid item.")
 	local pointer = cache[set]
-	print(pointer)
+	--print ("p:",item,pointer)
 	if not pointer then
 		return
 	end
@@ -299,6 +298,7 @@ function PT3:ItemInSet(item, set)
 		-- The requested set is a multiset, iterate its children.  Return the first matching item.
 		for _,v in ipairs(pointer) do
 			if v[item] then
+				print (v[item], v.set)
 				return v[item], v.set
 			end
 		end

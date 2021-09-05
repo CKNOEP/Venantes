@@ -207,12 +207,12 @@ function SphereButtons:ButtonUpdateMenus()
             local menuButton = _G[self.buttons.prefix..'Button'..menuId];
             if menuButton ~= nil then
                 local menuStateHeader = _G[self.buttons.prefix..'Button'..menuId..'StateHeader'];
-                print (menuStateHeader)
+               
 				if menuStateHeader == nil then -- init
                     -- create state header
                     --Introduit a WLTK Patch 3.0 - SecureHandlerClickTemplate
-				--  menuStateHeader = CreateFrame('Frame', self.buttons.prefix..'Button'..menuId..'StateHeader', nil, "SecureHandlerAttributeTemplate SecureHandlerClickTemplate SecureHandlerEnterLeaveTemplate");
-                    menuStateHeader = CreateFrame('Frame', self.buttons.prefix..'Button'..menuId..'StateHeader', nil,  'SecureHandlerStateTemplate SecureHandlerAttributeTemplate');
+				      menuStateHeader = CreateFrame('Frame', self.buttons.prefix..'Button'..menuId..'StateHeader', nil, "SecureHandlerAttributeTemplate  SecureHandlerEnterLeaveTemplate");
+                --    menuStateHeader = CreateFrame('Frame', self.buttons.prefix..'Button'..menuId..'StateHeader', nil,  "SecureHandlerAttributeTemplate SecureHandlerClickTemplate SecureHandlerEnterLeaveTemplate");
 
                     menuStateHeader:SetAllPoints(menuButton);     
                     
@@ -239,14 +239,15 @@ function SphereButtons:ButtonUpdateMenus()
                     menuStateHeader:SetAttribute('delaystatemap-anchor-mouseup', '1:0');
                     menuStateHeader:SetAttribute('delaytimemap-anchor-mouseup', '4');
                     menuStateHeader:SetAttribute('delayhovermap-anchor-mouseup', 'true');                    
-                end
+               -- print (menuStateHeader:GetName())
+				end
                
 				if Venantes.db.profile.menuKeepOpen then
                     menuButton:SetAttribute('onmouseupbutton1', '');                
                 elseif Venantes.db.profile.menuCloseTimeout and Venantes.db.profile.menuCloseTimeout > 0 then
                     menuButton:SetAttribute('onmouseupbutton1', 'mup');                
                     menuStateHeader:SetAttribute('delaytimemap-anchor-mouseup', Venantes.db.profile.menuCloseTimeout);
-                print (Venantes.db.profile.menuCloseTimeout , Venantes.db.profile.menuCloseTimeout) 
+                --print (Venantes.db.profile.menuCloseTimeout , Venantes.db.profile.menuCloseTimeout) 
 				else
                     menuButton:SetAttribute('onmouseupbutton1', '');                
                 end                
@@ -296,7 +297,7 @@ function SphereButtons:ButtonUpdateMenus()
                 for i = 1, table.getn(menuActions), 1 do
                     local button = _G[self.buttons.prefix..'Button'..menuId..i];
                     local actionType, actionName, actionTexture = SphereCore:Get_ActionInfo(menuActions[i].type, menuActions[i].data);
-                   -- print (actionType, actionName, actionTexture)
+                    --print (actionType, actionName, actionTexture)
 					if actionType ~= nil and actionName ~= nil and actionTexture ~= nil then
                         if button == nil then
                            --print ("D", self.buttons.prefix..'DynamicButtonTemplate')
@@ -339,28 +340,29 @@ function SphereButtons:ButtonUpdateMenus()
                                 buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\WoWUnknownItem01');
                                 self:DebugTexture(actionTexture);
                             else
-							--buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..actionTexture) 
-							--print ("T File path",buttonTexture:GetTextureFilePath())
+
 							local str = buttonTexture:GetTextureFilePath()
 							if strmatch(str, "^%-?[%d%.]+%d$") then 
-							--print("String") 
+							--("String") 
+							
 							else
-							--print("integer")
-							local Bt_Texture = Venantes:Get_Texture_Path(VENANTES_SPELLS_TEXTURE,actionTexture)
-							--print(actionTexture,Bt_Texture,actionTexture)
+							--("integer")
+								local Bt_Texture = Venantes:Get_Texture_Path(VENANTES_SPELLS_TEXTURE,actionTexture)
+							
 							if Bt_Texture then 
+							
 							buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..Bt_Texture) 
+							
 							end
 							
-							--buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..Texture) 
-							--print(buttonTexture:GetTextureFilePath())
+
 							end
 							
 							
 							
 							end
                         end
-					HideUIPanel(button);
+					--HideUIPanel(button);
                     elseif button ~= nil then
                         print ("hide", button:GetName())
 						HideUIPanel(button);
@@ -521,7 +523,8 @@ end
 
 -- set button enabled/disabled
 function SphereButtons:ButtonSetStatus(buttonId, enabled)
-    local buttonTexture = _G[self.buttons.prefix..'Button'..buttonId..'_Icon'];
+	--print(buttonId, enabled)
+   local buttonTexture = _G[self.buttons.prefix..'Button'..buttonId..'_Icon'];
     if buttonTexture ~= nil then
         if enabled then
             buttonTexture:SetVertexColor(1.0, 1.0, 1.0);

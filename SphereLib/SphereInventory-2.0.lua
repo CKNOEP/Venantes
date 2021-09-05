@@ -54,18 +54,22 @@ function SphereInventory:InventoryScanBag(bagId)
     -- For each slot
 	for slotId=1, GetContainerNumSlots(bagId), 1 do
         local itemLink = GetContainerItemLink(bagId, slotId);
-        if itemLink ~= nil then
+       
+		if itemLink ~= nil then
             local itemId = self:InventoryParseLink(itemLink);
-            local _, itemCount = GetContainerItemInfo(bagId, slotId);
+             print (itemId,itemLink)
+			local _, itemCount = GetContainerItemInfo(bagId, slotId);
             self:InventoryCheckItem(itemId, itemCount);
         end
     end
 end
 
 function SphereInventory:InventoryCheckItem(itemId, itemCount)
-    local _, _, _, _, itemMinLevel = GetItemInfo(itemId);
+    print (itemId, itemCount)
+	local _, _, _, _, itemMinLevel = GetItemInfo(itemId);
     -- hearthstone?  
-    if itemId == 6948 then
+	
+   if itemId == 6948 then
         self:InventorySetItem('HEARTHSTONE', itemId, 1, false);
     -- is it a heal potion?
     elseif self.PT:ItemInSet(itemId, 'Consumable.Potion.Recovery.Healing.Basic') then
@@ -157,7 +161,8 @@ function SphereInventory:InventoryCheckItem(itemId, itemCount)
         end
         -- flying mount 
         if self.PT:ItemInSet(itemId, 'Misc.Mount.Flying') then
-            if self.inventoryItems['MOUNTS_FLY'] == nil then
+		print ("mount F " ,itemId)	
+		if self.inventoryItems['MOUNTS_FLY'] == nil then
                 self:InventorySetItem('MOUNTS_FLY', itemId, 1, false);  
             elseif self.inventoryItems['MOUNTS_FLY'].minLevel < itemMinLevel then
                 self:InventorySetItem('MOUNTS_FLY', itemId, 1, false);  
@@ -214,7 +219,8 @@ function SphereInventory:InventoryGetItemCooldown(itemName)
 end
 
 function SphereInventory:InventoryGetItemData(groupId) 
-    if self.inventoryItems ~= nil and self.inventoryItems[groupId] ~= nil then
+    
+	if self.inventoryItems ~= nil and self.inventoryItems[groupId] ~= nil then
         local cooldown = self:InventoryGetItemCooldown(self.inventoryItems[groupId].name); 
        -- print(self.inventoryItems[groupId].count, self.inventoryItems[groupId].name, self.inventoryItems[groupId].texture, self.inventoryItems[groupId].spell, cooldown)
 		return self.inventoryItems[groupId].count, self.inventoryItems[groupId].name, self.inventoryItems[groupId].texture, self.inventoryItems[groupId].spell, cooldown;
