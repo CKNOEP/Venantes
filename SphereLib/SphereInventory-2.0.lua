@@ -57,7 +57,7 @@ function SphereInventory:InventoryScanBag(bagId)
        
 		if itemLink ~= nil then
             local itemId = self:InventoryParseLink(itemLink);
-             print (itemId,itemLink)
+             --print (itemId,itemLink)
 			local _, itemCount = GetContainerItemInfo(bagId, slotId);
             self:InventoryCheckItem(itemId, itemCount);
         end
@@ -65,7 +65,7 @@ function SphereInventory:InventoryScanBag(bagId)
 end
 
 function SphereInventory:InventoryCheckItem(itemId, itemCount)
-    print (itemId, itemCount)
+   print (itemId, itemCount)
 	local _, _, _, _, itemMinLevel = GetItemInfo(itemId);
     -- hearthstone?  
 	
@@ -77,20 +77,22 @@ function SphereInventory:InventoryCheckItem(itemId, itemCount)
             self:InventorySetItem('POTION_HP', itemId, itemCount, false);
         elseif self.inventoryItems['POTION_HP'].id == itemId then
             self.inventoryItems['POTION_HP'].count = self.inventoryItems['POTION_HP'].count + itemCount;
-        elseif self.db.profile.buttonPotionWeakest and self.inventoryItems['POTION_HP'].minLevel > itemMinLevel then
+        elseif Venantes.db.profile.buttonPotionWeakest and self.inventoryItems['POTION_HP'].minLevel > itemMinLevel then
             self:InventorySetItem('POTION_HP', itemId, itemCount, false);
-        elseif (not self.db.profile.buttonPotionWeakest) and self.inventoryItems['POTION_HP'].minLevel < itemMinLevel then
+        elseif (not Venantes.db.profile.buttonPotionWeakest) and self.inventoryItems['POTION_HP'].minLevel < itemMinLevel then
             self:InventorySetItem('POTION_HP', itemId, itemCount, false);
         end
     -- is it a mana potion?
     elseif self.PT:ItemInSet(itemId, 'Consumable.Potion.Recovery.Mana.Basic') then
+	print(itemId, 'Consumable.Potion.Recovery.Mana.Basic') 
+
         if self.inventoryItems['POTION_MP'] == nil or self.inventoryItems['POTION_MP'].count <= 0 then
             self:InventorySetItem('POTION_MP', itemId, itemCount, false);
         elseif self.inventoryItems['POTION_MP'].id == itemId then
             self.inventoryItems['POTION_MP'].count = self.inventoryItems['POTION_MP'].count + itemCount;
-        elseif self.db.profile.buttonPotionWeakest and self.inventoryItems['POTION_MP'].minLevel > itemMinLevel then
+        elseif Venantes.db.profile.buttonPotionWeakest and self.inventoryItems['POTION_MP'].minLevel > itemMinLevel then
             self:InventorySetItem('POTION_MP', itemId, itemCount, false);
-        elseif (not self.db.profile.buttonPotionWeakest) and self.inventoryItems['POTION_MP'].minLevel < itemMinLevel then
+        elseif (not Venantes.db.profile.buttonPotionWeakest) and self.inventoryItems['POTION_MP'].minLevel < itemMinLevel then
             self:InventorySetItem('POTION_MP', itemId, itemCount, false);
         end
     -- is it some conjured food
@@ -101,9 +103,9 @@ function SphereInventory:InventoryCheckItem(itemId, itemCount)
             self.inventoryItems['FOOD'].count = self.inventoryItems['FOOD'].count + itemCount;
         elseif not self.inventoryItems['FOOD'].conjured then
             self:InventorySetItem('FOOD', itemId, itemCount, true); 
-        elseif self.db.profile.buttonDrinkWeakest and self.inventoryItems['FOOD'].minLevel > itemMinLevel then
+        elseif Venantes.db.profile.buttonDrinkWeakest and self.inventoryItems['FOOD'].minLevel > itemMinLevel then
             self:InventorySetItem('FOOD', itemId, itemCount, true); 
-        elseif (not self.db.profile.buttonDrinkWeakest) and self.inventoryItems['FOOD'].minLevel < itemMinLevel then
+        elseif (not Venantes.db.profile.buttonDrinkWeakest) and self.inventoryItems['FOOD'].minLevel < itemMinLevel then
             self:InventorySetItem('FOOD', itemId, itemCount, true); 
         end
     -- is it some food
@@ -112,9 +114,9 @@ function SphereInventory:InventoryCheckItem(itemId, itemCount)
             self:InventorySetItem('FOOD', itemId, itemCount, false);  
         elseif self.inventoryItems['FOOD'].id == itemId then
             self.inventoryItems['FOOD'].count = self.inventoryItems['FOOD'].count + itemCount;
-        elseif self.db.profile.buttonDrinkWeakest and (not self.inventoryItems['FOOD'].conjured) and self.inventoryItems['FOOD'].minLevel > itemMinLevel then
+        elseif Venantes.db.profile.buttonDrinkWeakest and (not self.inventoryItems['FOOD'].conjured) and self.inventoryItems['FOOD'].minLevel > itemMinLevel then
             self:InventorySetItem('FOOD', itemId, itemCount, false);  
-        elseif (not self.db.profile.buttonDrinkWeakest) and (not self.inventoryItems['FOOD'].conjured) and self.inventoryItems['FOOD'].minLevel < itemMinLevel then
+        elseif (not Venantes.db.profile.buttonDrinkWeakest) and (not self.inventoryItems['FOOD'].conjured) and self.inventoryItems['FOOD'].minLevel < itemMinLevel then
             self:InventorySetItem('FOOD', itemId, itemCount, false);  
         end
     -- is it a conjured drink
@@ -125,9 +127,9 @@ function SphereInventory:InventoryCheckItem(itemId, itemCount)
             self.inventoryItems['DRINK'].count = self.inventoryItems['DRINK'].count + itemCount;
         elseif not self.inventoryItems['DRINK'].conjured then
             self:InventorySetItem('DRINK', itemId, itemCount, true); 
-        elseif self.db.profile.buttonDrinkWeakest and self.inventoryItems['DRINK'].minLevel > itemMinLevel then
+        elseif Venantes.db.profile.buttonDrinkWeakest and self.inventoryItems['DRINK'].minLevel > itemMinLevel then
             self:InventorySetItem('DRINK', itemId, itemCount, true); 
-        elseif (not self.db.profile.buttonDrinkWeakest) and  self.inventoryItems['DRINK'].minLevel < itemMinLevel then
+        elseif (not Venantes.db.profile.buttonDrinkWeakest) and  self.inventoryItems['DRINK'].minLevel < itemMinLevel then
             self:InventorySetItem('DRINK', itemId, itemCount, true); 
         end
     -- is it a drink
@@ -136,9 +138,9 @@ function SphereInventory:InventoryCheckItem(itemId, itemCount)
             self:InventorySetItem('DRINK', itemId, itemCount, false);  
         elseif self.inventoryItems['DRINK'].id == itemId then
             self.inventoryItems['DRINK'].count = self.inventoryItems['DRINK'].count + itemCount;
-        elseif self.db.profile.buttonDrinkWeakest and (not self.inventoryItems['DRINK'].conjured) and self.inventoryItems['DRINK'].minLevel > itemMinLevel then
+        elseif Venantes.db.profile.buttonDrinkWeakest and (not self.inventoryItems['DRINK'].conjured) and self.inventoryItems['DRINK'].minLevel > itemMinLevel then
             self:InventorySetItem('DRINK', itemId, itemCount, false);  
-        elseif (not self.db.profile.buttonDrinkWeakest) and (not self.inventoryItems['DRINK'].conjured) and self.inventoryItems['DRINK'].minLevel < itemMinLevel then
+        elseif (not Venantes.db.profile.buttonDrinkWeakest) and (not self.inventoryItems['DRINK'].conjured) and self.inventoryItems['DRINK'].minLevel < itemMinLevel then
             self:InventorySetItem('DRINK', itemId, itemCount, false);  
         end
     -- is it a mount?
