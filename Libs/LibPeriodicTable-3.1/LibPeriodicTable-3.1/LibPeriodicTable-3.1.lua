@@ -298,7 +298,7 @@ function PT3:ItemInSet(item, set)
 		-- The requested set is a multiset, iterate its children.  Return the first matching item.
 		for _,v in ipairs(pointer) do
 			if v[item] then
-				print (v[item], v.set)
+				--print (v[item], v.set)
 				return v[item], v.set
 			end
 		end

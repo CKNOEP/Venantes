@@ -34,7 +34,7 @@ function SphereButtons:ButtonSetup(buttonPrefix, buttonWidgets)
     for i=1, table.getn(self.buttons.widgets), 1 do
         -- make clickable
         local button = _G[self.buttons.prefix..'Button'..self.buttons.widgets[i]];
-        --print (button:GetName())
+       -- print (button:GetName())
 		if button ~= nil then
             button:RegisterForClicks('LeftButtonUp', 'MiddleButtonUp', 'RightButtonUp');
             -- artwork texture 
@@ -42,7 +42,8 @@ function SphereButtons:ButtonSetup(buttonPrefix, buttonWidgets)
             textureBorder:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\ButtonBorder');
             textureBorder:SetWidth(button:GetWidth());
             textureBorder:SetHeight(button:GetHeight());
-            textureBorder:SetPoint('CENTER', button, 'CENTER', 0, 0);
+            print(button:GetWidth(),button:GetHeight())
+			textureBorder:SetPoint('CENTER', button, 'CENTER', 0, 0);
         end
     end
     self:ButtonSetPositions();
@@ -213,7 +214,7 @@ function SphereButtons:ButtonUpdateMenus()
                     --Introduit a WLTK Patch 3.0 - SecureHandlerClickTemplate
 				      menuStateHeader = CreateFrame('Frame', self.buttons.prefix..'Button'..menuId..'StateHeader', nil, "SecureHandlerAttributeTemplate  SecureHandlerEnterLeaveTemplate");
                 --    menuStateHeader = CreateFrame('Frame', self.buttons.prefix..'Button'..menuId..'StateHeader', nil,  "SecureHandlerAttributeTemplate SecureHandlerClickTemplate SecureHandlerEnterLeaveTemplate");
-
+					
                     menuStateHeader:SetAllPoints(menuButton);     
                     
                     -- events to childs
@@ -304,8 +305,8 @@ function SphereButtons:ButtonUpdateMenus()
 							button = CreateFrame('Button', self.buttons.prefix..'Button'..menuId..i, menuStateHeader, self.buttons.prefix..'DynamicButtonTemplate');
                             -- artwork
                             local textureBorder = button:CreateTexture(self.buttons.prefix..'Button'..menuId..i..'_Border', 'BORDER');
-                            textureBorder:SetWidth(button:GetWidth());
-                            textureBorder:SetHeight(button:GetHeight());
+                            textureBorder:SetWidth(button:GetWidth()+1);
+                            textureBorder:SetHeight(button:GetHeight()+1);
                             textureBorder:SetPoint('CENTER', button, 'CENTER', 0, 0);                            
                             -- Hide in state 0, show in all other states
                             button:SetAttribute('hidestates', '0');
@@ -417,7 +418,8 @@ end
 -- set button icon
 function SphereButtons:ButtonSetIcon(buttonId, texture)
     local buttonTexture = _G[self.buttons.prefix..'Button'..buttonId..'_Icon'];
-    --print ("tex",buttonTexture,texture)
+   
+
 	if buttonTexture ~= nil then
         if texture == 'DEFAULT' then
             buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\WoWUnknownItem01');
@@ -428,11 +430,19 @@ function SphereButtons:ButtonSetIcon(buttonId, texture)
 			self:DebugTexture(texture);
         else
 		--buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..texture)
-		buttonTexture:SetTexture(texture)
+		--buttonTexture:SetTexture(texture)
 		
+		SetPortraitToTexture(buttonTexture, texture)
 		end
     --print("GT ",buttonTexture:GetName(),buttonTexture:GetTexture(),buttonTexture:GetTextureFilePath() )
 	end
+		if buttonId == "Potion" then
+	print ("popo")
+	buttonTexture:SetWidth(16)
+	buttonTexture:SetHeight(16)
+	end
+	 print ("tex",buttonId,texture,buttonTexture:GetWidth())
+	
 end
 
 

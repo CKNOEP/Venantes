@@ -1013,9 +1013,9 @@ function Venantes:UpdateActions()
     if petTexture ~= nil then
         local  _, _, petTextureFile = string.find(petTexture,'([^\\]+)$');
         if petTextureFile ~= nil then
---            SphereButtons:ButtonSetIcon('PetMenu', petTextureFile); 
-            SphereButtons:ButtonSetIcon('PetMenu', 132194); 			
-		--print("peticon",132194,petTextureFile)
+            SphereButtons:ButtonSetIcon('PetMenu', petTextureFile); 
+--            SphereButtons:ButtonSetIcon('PetMenu', 132194); 			
+		print("peticon",132194,petTextureFile)
 	   end
     end
     

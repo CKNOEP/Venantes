@@ -65,7 +65,7 @@ function SphereInventory:InventoryScanBag(bagId)
 end
 
 function SphereInventory:InventoryCheckItem(itemId, itemCount)
-   print (itemId, itemCount)
+  -- print (itemId, itemCount)
 	local _, _, _, _, itemMinLevel = GetItemInfo(itemId);
     -- hearthstone?  
 	
@@ -84,7 +84,7 @@ function SphereInventory:InventoryCheckItem(itemId, itemCount)
         end
     -- is it a mana potion?
     elseif self.PT:ItemInSet(itemId, 'Consumable.Potion.Recovery.Mana.Basic') then
-	print(itemId, 'Consumable.Potion.Recovery.Mana.Basic') 
+	--print(itemId, 'Consumable.Potion.Recovery.Mana.Basic') 
 
         if self.inventoryItems['POTION_MP'] == nil or self.inventoryItems['POTION_MP'].count <= 0 then
             self:InventorySetItem('POTION_MP', itemId, itemCount, false);
@@ -163,7 +163,7 @@ function SphereInventory:InventoryCheckItem(itemId, itemCount)
         end
         -- flying mount 
         if self.PT:ItemInSet(itemId, 'Misc.Mount.Flying') then
-		print ("mount F " ,itemId)	
+		--print ("mount F " ,itemId)	
 		if self.inventoryItems['MOUNTS_FLY'] == nil then
                 self:InventorySetItem('MOUNTS_FLY', itemId, 1, false);  
             elseif self.inventoryItems['MOUNTS_FLY'].minLevel < itemMinLevel then
