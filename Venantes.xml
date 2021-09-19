@@ -87,11 +87,14 @@
 			</Layer>
 		</Layers>
         <Scripts>
+			<OnClick>
+			</OnClick>
 			<OnLeave>
 				GameTooltip:Hide();
 			</OnLeave>
 			<OnDragStart>
 				Venantes:OnDragStart(self);
+								
 			</OnDragStart>
 			<OnDragStop>
 				Venantes:OnDragStop(self);
@@ -159,6 +162,7 @@
 				GameTooltip:Hide();
 			</OnLeave>
 			<OnDragStart>
+
 				Venantes:OnDragStart(VenantesSphere);
 
 			</OnDragStart>

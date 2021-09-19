@@ -351,6 +351,9 @@ function Venantes:OnInitialize()
     SphereCore:RegisterSpeechLanguage('zhTW', VENANTES_RANDOM_MESSAGES_zhTW);
     
     --ToDo find alternativ for timer (metro is abandoned)
+	--Timer is broken 
+	
+	--Old code -- 
 	--metro:Register("VenantesTimer", self.OnTimerTick, 1, self);
 end
 
@@ -385,13 +388,10 @@ function Venantes:OnEnable()
     --metro:Start("VenantesTimer");
 end
 
--- timer ticks
-function Venantes:OnTimerTick()
-    self:UpdateStatus();
-end
 
 -- event callbacks
 function Venantes:PLAYER_ENTERING_WORLD()
+	print(self,event)
     SphereCore:InitPlayerInfos();
     SphereCore:MountZoneInformation();
     SphereCore:UpdateSpellTable();
@@ -413,14 +413,17 @@ function Venantes:UNIT_PET()
 end
 
 function Venantes:BAG_UPDATE()
-    SphereInventory:InventoryScan();
+    print("BAG_UPDATE",BAG_UPDATE)
+	SphereInventory:InventoryScan();
     self:UpdateActions();
     self:UpdateStatus();
 end
 
 function Venantes:UNIT_INVENTORY_CHANGED(unit)
+ print("event",UNIT_INVENTORY_CHANGED)
     if unit == 'player' then
-        self:UpdateAmmoItem();
+    
+    self:UpdateAmmoItem();
     end
 end
 
@@ -429,8 +432,9 @@ function Venantes:ZONE_CHANGED_NEW_AREA()
     self:UpdateActions();
 end
 
-function Venantes:UNIT_SPELLCAST_SENT(unitId, spell, rank, target)
-    if unitId == 'player' then
+function Venantes:UNIT_SPELLCAST_SENT(unitId, spell, rank)
+    print(unitId, spell, rank, target)
+	if unitId == 'player' then
         self:OnSpellCastStart(spell, rank, target);
         if self.lastSpell == nil then
             self.lastSpell = {}
@@ -439,6 +443,7 @@ function Venantes:UNIT_SPELLCAST_SENT(unitId, spell, rank, target)
         self.lastSpell.rank = rank;
         self.lastSpell.target = target;
     end
+	
 end
 
 function Venantes:UNIT_SPELLCAST_STOP(unitId)
@@ -453,8 +458,9 @@ function Venantes:UNIT_SPELLCAST_STOP(unitId)
     end
 end
 
-function Venantes:UNIT_SPELLCAST_FAILED(unitId)
-    if unitId == 'player' then
+function Venantes:UNIT_SPELLCAST_FAILED(unitId, spell, rank)
+    print (unitId,spell, rank, target)
+	if unitId == 'player' then
         self.lastSpell = nil;
         if self.lastSpell ~= nil and self.lastSpell.spell ~= nil then
             self.lastSpell.spell = nil;
@@ -475,7 +481,8 @@ function Venantes:UNIT_SPELLCAST_INTERRUPTED(unitId)
 end
 
 function Venantes:UNIT_SPELLCAST_SUCCEEDED(unitId, spell, rank)
-    if unitId == 'player' then
+    print('success',unitId, spell, rank)
+	if unitId == 'player' then
         if self.lastSpell ~= nil then
             if self.lastSpell ~= nil and self.lastSpell.spell ~= nil and spell == self.lastSpell.spell then
                 self:OnSpellCast(spell, rank, self.lastSpell.target);
@@ -484,7 +491,11 @@ function Venantes:UNIT_SPELLCAST_SUCCEEDED(unitId, spell, rank)
             self.lastSpell.rank = nil;
             self.lastSpell.target = nil;
         end
-    end
+     
+	end
+SphereButtons:ButtonUpdateCooldown()
+SphereButtons:ButtonUpdateMenus();
+
 end
 
 -- status update events
@@ -861,13 +872,16 @@ function Venantes:UpdateStatus()
         for i=1, table.getn(self.buttons.menus['TrapsMenu']), 1 do
             if actionName == nil then
                 _, actionName, _, _, actionCooldown, actionMana = SphereCore:Get_ActionInfo(self.buttons.menus['TrapsMenu'][i].type, self.buttons.menus['TrapsMenu'][i].data);   
-            end
+            
+			end
         end
     end
     if actionName ~= nil then
-        if actionCooldown ~= nil and actionCooldown > 0 then
+     
+		if actionCooldown ~= nil and actionCooldown > 0 then
             cooldownString, cooldownUnit = SphereCore:GetFormattedCooldownTime(actionCooldown);
-            if cooldownString then
+           -- print ("CD", cooldownString, cooldownUnit)
+			if cooldownString then
                 SphereButtons:ButtonSetCaption('TrapsMenu', self:GetButtonCooldownStr(cooldownString, cooldownUnit));
                 SphereButtons:ButtonSetStatus('TrapsMenu', false); 
             else
@@ -879,7 +893,7 @@ function Venantes:UpdateStatus()
             SphereButtons:ButtonSetStatus('TrapsMenu', true);         
         end
     else
-        SphereButtons:ButtonSetStatus('TrapsMenu', false);     
+        SphereButtons:ButtonSetStatus('TrapsMenu', true);     
     end
     
     -- mount button highlighting
@@ -1003,11 +1017,15 @@ function Venantes:UpdateActions()
     
     -- check for pet - set button depending on pet
     SphereButtons:ButtonSetIcon('PetMenu', 'Ability_Hunter_BeastTaming'); 
-    if self.spellTable ~= nil and self.spellTable['HUNTER_PET_MEND'] ~= nil then
-        SphereButtons:ButtonSetMacro('PetMenu', 'RightButton', '/cast [target=pet,dead] '..self.spellTable['HUNTER_PET_REVIVE'].name..'; [nopet] '..self.spellTable['HUNTER_PET_CALL'].name..'; '..self.spellTable['HUNTER_PET_MEND'].name); 
+
+	if SphereCore.spellTable ~= nil and SphereCore.spellTable['HUNTER_PET_MEND'] ~= nil then
+        SphereButtons:ButtonSetMacro('PetMenu', 'RightButton', '/cast [target=pet,dead] '..SphereCore.spellTable['HUNTER_PET_REVIVE'].name..'; [nopet] '..SphereCore.spellTable['HUNTER_PET_CALL'].name..'; '..SphereCore.spellTable['HUNTER_PET_MEND'].name); 
     end
-    if self.spellTable ~= nil and self.spellTable['HUNTER_PET_CONTROL'] ~= nil then
-        SphereButtons:ButtonSetSpell('PetMenu', 'MiddleButton', self.spellTable['HUNTER_PET_CONTROL'].name); 
+   
+
+   if SphereCore.spellTable ~= nil and SphereCore.spellTable['HUNTER_PET_CONTROL'] ~= nil then
+         
+		SphereButtons:ButtonSetSpell('PetMenu', 'MiddleButton', SphereCore.spellTable['HUNTER_PET_CONTROL'].name); 
     end 
     local petTexture = GetPetIcon();
     if petTexture ~= nil then
@@ -1015,7 +1033,7 @@ function Venantes:UpdateActions()
         if petTextureFile ~= nil then
             SphereButtons:ButtonSetIcon('PetMenu', petTextureFile); 
 --            SphereButtons:ButtonSetIcon('PetMenu', 132194); 			
-		print("peticon",132194,petTextureFile)
+		--print("peticon",132194,petTextureFile)
 	   end
     end
     
@@ -1028,7 +1046,7 @@ function Venantes:UpdateMenuButtonSpells(menuId, defaultTexture)
     if self.db.profile[optionName] ~= nil then
         --print(menuId, defaultTexture)
 		local actionTypeRight, actionNameRight, actionTextureRight = SphereCore:Get_ActionInfo('spell', self.db.profile[optionName][1]);
-        --print (actionTypeRight, actionNameRight, actionTextureRight)
+        print (menuId, actionTypeRight, actionNameRight, actionTextureRight)
 		if actionTypeRight ~= nil and actionTypeRight == 'spell' and actionNameRight ~= nil then
             SphereButtons:ButtonSetSpell(menuId, 'RightButton', actionNameRight);
             if self.db.profile[optionName][1] ~= self.db.profile[optionName][0] then
@@ -1064,7 +1082,7 @@ function Venantes:UpdateItemButton(buttonId, groupIdLeft, groupIdRight, defaultT
    
 	local _, itemLeftName, itemLeftTexture  = SphereInventory:InventoryGetItemData(groupIdLeft);
     local _, itemRightName, itemRightTexture  = SphereInventory:InventoryGetItemData(groupIdRight);
-     print("b_ID ",buttonId, groupIdLeft,itemLeftName,itemLeftTexture, groupIdRight,itemRightName, itemRightTexture, defaultTexture)
+    -- print("b_ID ",buttonId, groupIdLeft,itemLeftName,itemLeftTexture, groupIdRight,itemRightName, itemRightTexture, defaultTexture)
 	
 	
 	if itemLeftName ~= nil then
@@ -1122,10 +1140,12 @@ end
 
 
 function Venantes:OnSpellCastStart(spell, rank, target)
+--??
 end
 
 function Venantes:OnSpellCast(spell, rank, target)
-    if spell ~= nil and self.spellTableRevIndex ~= nil then
+    print ('cast',spell, rank, target)
+	if spell ~= nil and self.spellTableRevIndex ~= nil then
         if target == nil then
             target = '';
         end
@@ -1262,13 +1282,13 @@ function Venantes:GetTooltipCooldownStr(cooldownString, cooldownUnit)
     end
 end
 function Venantes:OnDragStart(element)
-   print ("drag start",element)
+   --print ("drag start",element:GetName())
 	if not InCombatLockdown() then
         element:StartMoving();
     end
 end
 function Venantes:OnDragStop(element)
-        print ("drag stop",element)
+       print ("drag stop",element:GetName())
 	element:StopMovingOrSizing();
     if not InCombatLockdown() then
         if (not Venantes.db.profile.buttonLocking) and Venantes.db.profile.buttonsUseGrid then

@@ -205,17 +205,24 @@ end
 function SphereInventory:InventoryGetItemCooldown(itemName)
     if itemName ~= nil and itemName then
        --print ("itemName",itemName,Id) 
-	local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType,
-	itemSubType, itemStackCount, itemEquipLoc, itemTexture, itemSellPrice =
+	local itemName, itemLink, itemQuality, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
+itemEquipLoc, itemTexture, sellPrice, classID, subclassID, bindType, expacID, setID, isCraftingReagent =
     GetItemInfo(itemName)
-	local _, _, Color, Ltype, Id, Enchant, Gem1, Gem2, Gem3, Gem4,
-    Suffix, Unique, LinkLvl, Name = string.find(itemLink,
-    "|?c?f?f?(%x*)|?H?([^:]*):?(%d+):?(%d*):?(%d*):?(%d*):?(%d*):?(%d*):?(%-?%d*):?(%-?%d*):?(%d*):?(%d*):?(%-?%d*)|?h?%[?([^%[%]]*)%]?|?h?|?r?")
+	
+	if (itemLink ~= nil) then
+	--local _, _, Color, Ltype, Id, Enchant, Gem1, Gem2, Gem3, Gem4,
+    --Suffix, Unique, LinkLvl, Name = string.find(itemLink,
+    --"|?c?f?f?(%x*)|?H?([^:]*):?(%d+):?(%d*):?(%d*):?(%d*):?(%d*):?(%d*):?(%-?%d*):?(%-?%d*):?(%d*):?(%d*):?(%-?%d*)|?h?%[?([^%[%]]*)%]?|?h?|?r?")
 	--print ("itemName",itemName,Id)
-		local startTime, duration, enable = GetItemCooldown(Id);
+	itemID, itemType, itemSubType, itemEquipLoc, icon, itemClassID, itemSubClassID = GetItemInfoInstant(itemLink) 
+	end
+	
+	local startTime, duration, enable = GetItemCooldown(itemID);
         if enable and startTime ~= nil and startTime > 0 and duration ~= nil and duration > 1 then
-            return math.floor(startTime - GetTime() + duration + 0.5);
-        end
+            --print (id,startTime, duration, enable)
+			return math.floor(startTime - GetTime() + duration + 0.5);
+			
+		end
     end
     return 0;
 end

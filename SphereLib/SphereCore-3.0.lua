@@ -91,13 +91,17 @@ function SphereCore:UpdateSpellTable()
 	for i=1, 300, 1 do
 
 		local spellName,subSpellName = GetSpellBookItemName(i, "spell")
+		--print ("spellName",spellName,"SubSpell",subSpellName)
 		local spellID = select(2, GetSpellBookItemInfo(i, BOOKTYPE_SPELL))
 		--print (i,spellName,subSpellName, BOOKTYPE_SPELL);
 		if not spellName then
 			do break end
 		else
-            local _, _, spellRank = string.find(subSpellName, '(%d+)$');
-            spellRank = tonumber(spellRank);
+            if subSpellName then
+			local spellRank = string.find(subSpellName, '(%d+)$');
+            end
+			
+			spellRank = tonumber(spellRank);
 			--print('Spellrank',spellRank)
             local sphereSpellId = self.spellTableRevIndex[spellName];
             if sphereSpellId and self.spellTable[sphereSpellId] ~= nil then
@@ -198,12 +202,14 @@ end
 function SphereCore:GetSpellCooldown(spellName)     
     local sphereSpellId = self.spellTableRevIndex[spellName];
     if sphereSpellId and self.spellTable[sphereSpellId] ~= nil and self.spellTable[sphereSpellId].index ~= nil  and self.spellTable[sphereSpellId].index > 0 then
-        local startTime, duration, enable = GetSpellCooldown(self.spellTable[sphereSpellId].index, BOOKTYPE_SPELL);
-        if enable and startTime ~= nil and startTime > 0 and duration ~= nil and duration > 2 then
-            return math.floor(startTime - GetTime() + duration + 0.5);
+        --local startTime, duration, enable = GetSpellCooldown(self.spellTable[sphereSpellId].index, BOOKTYPE_SPELL);
+		local startTime, duration, enable = GetSpellCooldown(spellName)
+		--print(spellName,startTime, duration, enable)
+		if enable and startTime ~= nil and startTime > 0 and duration ~= nil and duration > 2 then
+            --return math.floor(startTime - GetTime() + duration + 0.5);
         end
     end
-    return 0;
+    --return 0;
 end
 
 function SphereCore:GetEquipCooldown(slot)     
