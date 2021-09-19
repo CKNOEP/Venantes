@@ -20,8 +20,8 @@ local SphereCore = LibStub:GetLibrary("SphereCore-3.0");
 -- button setup and positions
 
 
-function SphereButtons:ButtonSetup(buttonPrefix, buttonWidgets)
-    --setup des boutons autour de la sphere
+function SphereButtons:ButtonSetup(buttonPrefix, buttonWidgets)--setup des boutons autour de la sphere
+    
 	if self.buttons == nil then
         self.buttons = {};
     end
@@ -34,7 +34,7 @@ function SphereButtons:ButtonSetup(buttonPrefix, buttonWidgets)
     for i=1, table.getn(self.buttons.widgets), 1 do
         -- make clickable
         local button = _G[self.buttons.prefix..'Button'..self.buttons.widgets[i]];
-        print ("registerforclic",button:GetName())
+        --print ("registerforclic",button:GetName())
 		if button ~= nil then
             button:RegisterForClicks('LeftButtonUp', 'MiddleButtonUp', 'RightButtonUp');
             -- artwork texture 
@@ -554,8 +554,10 @@ end
 
 -- set sphere spell action
 function SphereButtons:SphereSetSpell(mouseButton, spellName) 
-    local sphere = _G[self.buttons.prefix..'Sphere'];
-    if sphere ~= nil then
+   
+	local sphere = _G[self.buttons.prefix..'Sphere'];
+        print ("Sphere",sphere:GetName(),mouseButton, spellName) 
+	if sphere ~= nil then
         if mouseButton == 'LeftButton' then
             sphere:SetAttribute('type1', 'spell');
             sphere:SetAttribute('spell1', spellName);
@@ -563,8 +565,8 @@ function SphereButtons:SphereSetSpell(mouseButton, spellName)
             sphere:SetAttribute('type2', 'spell');
             sphere:SetAttribute('spell2', spellName);
         elseif mouseButton == 'MiddleButton' then
-            sphere:SetAttribute('type3', 'spell');
-            sphere:SetAttribute('spell3', spellName);        
+            sphere:SetAttribute('type3', 'macro');
+            sphere:SetAttribute('macrotext3',"/run VenantesConfig_Toggle()");        
         end
     end
 end

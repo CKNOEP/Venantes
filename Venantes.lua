@@ -534,26 +534,26 @@ function Venantes:ShowTooltip(element, buttonId, anchor)
     end
   
     if buttonId == 'MAIN' then    
-		GameTooltip:AddLine('Venantes');
+		GameTooltip:AddLine('Venantes Reborn TBC ');
         local ammoCount, ammoName = SphereCore:GetAmmoCount(L['AMMO']);
         if ammoName ~= nil then
-            GameTooltip:AddDoubleLine(ammoName..': ', ammoCount, 0.8, 0.8, 0.1, 1.0, 1.0, 1.0);
+            GameTooltip:AddDoubleLine(ammoName..' : ', ammoCount, 0.8, 0.8, 0.1, 1.0, 1.0, 1.0);
         end
         local itemCount, itemName = SphereInventory:InventoryGetItemData('DRINK');
         if itemName ~= nil and itemCount ~= nil then
-            GameTooltip:AddDoubleLine(itemName..': ', itemCount, 0.8, 0.8, 0.1, 1.0, 1.0, 1.0);
+            GameTooltip:AddDoubleLine(itemName..' : ', itemCount, 0.8, 0.8, 0.1, 1.0, 1.0, 1.0);
         end
         local itemCount, itemName = SphereInventory:InventoryGetItemData('FOOD');
         if itemName ~= nil and itemCount ~= nil then
-            GameTooltip:AddDoubleLine(itemName..': ', itemCount, 0.8, 0.8, 0.1, 1.0, 1.0, 1.0);
+            GameTooltip:AddDoubleLine(itemName..' : ', itemCount, 0.8, 0.8, 0.1, 1.0, 1.0, 1.0);
         end
         local itemCount, itemName = SphereInventory:InventoryGetItemData('POTION_MP');
         if itemName ~= nil and itemCount ~= nil then
-            GameTooltip:AddDoubleLine(itemName..': ', itemCount, 0.8, 0.8, 0.1, 1.0, 1.0, 1.0);
+            GameTooltip:AddDoubleLine(itemName..' : ', itemCount, 0.8, 0.8, 0.1, 1.0, 1.0, 1.0);
         end
         local itemCount, itemName = SphereInventory:InventoryGetItemData('POTION_HP');
         if itemName ~= nil and itemCount ~= nil then
-            GameTooltip:AddDoubleLine(itemName..': ', itemCount, 0.8, 0.8, 0.1, 1.0, 1.0, 1.0);
+            GameTooltip:AddDoubleLine(itemName..' : ', itemCount, 0.8, 0.8, 0.1, 1.0, 1.0, 1.0);
         end        
         local _, actionLeftName, _, actionLeftTooltip, actionLeftCooldown = SphereButtons:ButtonGetActionInfo(self.db.profile.sphereActionLeft);
         local _, actionRightName, _, actionRightTooltip, actionRightCooldown = SphereButtons:ButtonGetActionInfo(self.db.profile.sphereActionRight);  
@@ -581,7 +581,10 @@ function Venantes:ShowTooltip(element, buttonId, anchor)
                 GameTooltip:AddLine(self:GetTooltipCooldownStr(cooldownString, cooldownUnit), 0.7, 0.7, 0.7);
             end
         end
-    elseif buttonId == 'DRINK' then
+		GameTooltip:AddLine(L['TOOLTIP_MIDDLECLICK'], 1.0, 1.0, 1.0);
+		GameTooltip:AddLine("Configure Venantes", 0.8, 0.8, 0.1);
+	
+	elseif buttonId == 'DRINK' then
 		GameTooltip:AddLine(L['TOOLTIP_DRINKFOOD']);
         self:TooltipAddItemData(GameTooltip, 'LeftButton', 'DRINK');
         self:TooltipAddItemData(GameTooltip, 'RightButton', 'FOOD');
@@ -963,7 +966,8 @@ function Venantes:UpdateActions()
         end
     else 
         SphereButtons:SphereSetSpell('LeftButton', '');
-    end
+		
+	end
     actionType, actionName = SphereButtons:ButtonGetActionInfo(self.db.profile.sphereActionRight);    
     if actionType ~= nil and actionName then
         if actionType == 'spell' then
@@ -974,7 +978,10 @@ function Venantes:UpdateActions()
     else 
         SphereButtons:SphereSetSpell('RightButton', '');
     end 
-    
+    -- Set Middle Button
+		SphereButtons:SphereSetSpell('MiddleButton', 'ToogleConfig');
+		
+		
     -- drink button
     self:UpdateItemButton('Drink', 'DRINK', 'FOOD', 'Spell_Misc_Drink');    
     -- potions button

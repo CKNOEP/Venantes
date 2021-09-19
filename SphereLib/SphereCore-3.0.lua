@@ -44,7 +44,7 @@ function SphereCore:InitPlayerInfos()
     elseif Venantes.playerData.language == 'esES' then
         self.identStrings.ammoTrown = 'Arrojadiza';
     elseif Venantes.playerData.language == 'frFR' then
-        self.identStrings.ammoTrown = 'Jet';  
+        self.identStrings.ammoTrown = 'Projectile';  
     elseif Venantes.playerData.language == 'koKR' then
         -- no translation available    
     elseif Venantes.playerData.language == 'zhCN' then
@@ -384,20 +384,32 @@ function SphereCore:UpdateAmmoItem()
     
     local ammoTrownIdent = self.identStrings.ammoTrown;
     
-    local ammoSlotId = GetInventorySlotInfo("ammoSlot");
-	local rangedSlotId = GetInventorySlotInfo("rangedSlot");
-    if (GetInventoryItemQuality("player", rangedSlotId) and string.find(GetInventoryItemLink("player", rangedSlotId), ammoTrownIdent)) then
+    local ammoSlotId,textureName = GetInventorySlotInfo("AmmoSlot");
+	local rangedSlotId, textureName = GetInventorySlotInfo("rangedSlot");
+    
+
+	local itemId = GetInventoryItemID("player", ammoSlotId);
+   
+	ammoItemLink = GetItemInfo(itemId)
+	--print ("ammoItemLink",ammoItemLink)
+	
+	
+	if (GetInventoryItemQuality("player", rangedSlotId) and string.find(GetInventoryItemLink("player", rangedSlotId), ammoTrownIdent)) then
 		usedSlotId = rangedSlotId;
 	elseif GetInventoryItemQuality("player", ammoSlotId) then
 		usedSlotId = ammoSlotId;
 	end
 	
+	
 	if usedSlotId then
 		Venantes.playerData.ammo.slot = usedSlotId;
         itemLink = GetInventoryItemLink("player", usedSlotId);
+		
 		itemCount = GetInventoryItemCount("player", usedSlotId);
-        if itemLink then
-            Venantes.playerData.ammo.name = GetItemInfo(itemLink);
+        
+		if itemLink then
+			
+			Venantes.playerData.ammo.name = GetItemInfo(itemLink);
         else
             --if not self.gratuity then
             --    self:ShowMessage('Gratuity Init', 'CHAT');
@@ -405,14 +417,15 @@ function SphereCore:UpdateAmmoItem()
             --end
             --self:ShowMessage('Gratuity Use', 'CHAT');
             --self.gratuity:SetInventoryItem('player', usedSlotId);
-                Venantes.playerData.ammo.name = 'name'--self.gratuity:GetLine(1);-->Useless
+                Venantes.playerData.ammo.name = ammoItemLink --self.gratuity:GetLine(1);-->Useless
             if not itemName then
-                Venantes.playerData.ammo.name = '';
+                
+				Venantes.playerData.ammo.name = select(2,GetItemInfo(ammoItemLink)).." "
             end
         end
 	else
 		Venantes.playerData.ammo.slot = nil;
-		Venantes.playerData.ammo.name = '';
+		Venantes.playerData.ammo.name = '--';
 	end
 end
 
