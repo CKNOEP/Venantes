@@ -635,7 +635,7 @@ function SphereButtons:ButtonSetPosition(buttonName, buttonPos)
     
     local button = _G[self.buttons.prefix..'Button'..buttonName];
     
-	print (button:GetName(), button:GetWidth(),button:GetHeight())
+	--print (button:GetName(), button:GetWidth(),button:GetHeight())
 	if button ~= nil then
         _G[self.buttons.prefix..'Button'..buttonName..'_Border']:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\ButtonBorder');
         button:SetHighlightTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\ButtonHighlight');

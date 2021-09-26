@@ -433,7 +433,7 @@ function Venantes:ZONE_CHANGED_NEW_AREA()
 end
 
 function Venantes:UNIT_SPELLCAST_SENT(unitId, spell, rank)
-    print(unitId, spell, rank, target)
+    --print(unitId, spell, rank, target)
 	if unitId == 'player' then
         self:OnSpellCastStart(spell, rank, target);
         if self.lastSpell == nil then
@@ -459,7 +459,7 @@ function Venantes:UNIT_SPELLCAST_STOP(unitId)
 end
 
 function Venantes:UNIT_SPELLCAST_FAILED(unitId, spell, rank)
-    print (unitId,spell, rank, target)
+    --print (unitId,spell, rank, target)
 	if unitId == 'player' then
         self.lastSpell = nil;
         if self.lastSpell ~= nil and self.lastSpell.spell ~= nil then
@@ -481,7 +481,7 @@ function Venantes:UNIT_SPELLCAST_INTERRUPTED(unitId)
 end
 
 function Venantes:UNIT_SPELLCAST_SUCCEEDED(unitId, spell, rank)
-    print('success',unitId, spell, rank)
+    --print('success',unitId, spell, rank)
 	if unitId == 'player' then
         if self.lastSpell ~= nil then
             if self.lastSpell ~= nil and self.lastSpell.spell ~= nil and spell == self.lastSpell.spell then
@@ -1053,7 +1053,7 @@ function Venantes:UpdateMenuButtonSpells(menuId, defaultTexture)
     if self.db.profile[optionName] ~= nil then
         --print(menuId, defaultTexture)
 		local actionTypeRight, actionNameRight, actionTextureRight = SphereCore:Get_ActionInfo('spell', self.db.profile[optionName][1]);
-        print (menuId, actionTypeRight, actionNameRight, actionTextureRight)
+        --print (menuId, actionTypeRight, actionNameRight, actionTextureRight)
 		if actionTypeRight ~= nil and actionTypeRight == 'spell' and actionNameRight ~= nil then
             SphereButtons:ButtonSetSpell(menuId, 'RightButton', actionNameRight);
             if self.db.profile[optionName][1] ~= self.db.profile[optionName][0] then
@@ -1151,7 +1151,7 @@ function Venantes:OnSpellCastStart(spell, rank, target)
 end
 
 function Venantes:OnSpellCast(spell, rank, target)
-    print ('cast',spell, rank, target)
+    --print ('cast',spell, rank, target)
 	if spell ~= nil and self.spellTableRevIndex ~= nil then
         if target == nil then
             target = '';
@@ -1295,7 +1295,7 @@ function Venantes:OnDragStart(element)
     end
 end
 function Venantes:OnDragStop(element)
-       print ("drag stop",element:GetName())
+      -- print ("drag stop",element:GetName())
 	element:StopMovingOrSizing();
     if not InCombatLockdown() then
         if (not Venantes.db.profile.buttonLocking) and Venantes.db.profile.buttonsUseGrid then
