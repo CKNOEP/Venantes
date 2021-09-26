@@ -42,8 +42,7 @@ function SphereButtons:ButtonSetup(buttonPrefix, buttonWidgets)--setup des bouto
             textureBorder:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\ButtonBorder');
             textureBorder:SetWidth(button:GetWidth());
             textureBorder:SetHeight(button:GetHeight());
-			print ("SetupB",button:GetWidth(),button:GetHeight())
-            --print(button:GetWidth(),button:GetHeight())
+			
 			textureBorder:SetPoint('CENTER', button, 'CENTER', 0, 0);
         end
     end
@@ -325,7 +324,7 @@ function SphereButtons:ButtonUpdateMenus()
                             button:SetAttribute('hidestates', '0');
                             -- Add the btn to the driver header
                             menuStateHeader:SetAttribute('addchild', button);
-							print("attr",menuStateHeader:GetName(), menuStateHeader:GetAttribute("_onclick"))
+							--print("attr",menuStateHeader:GetName(), menuStateHeader:GetAttribute("_onclick"))
 					   end
                         -- set skin
                         _G[self.buttons.prefix..'Button'..menuId..i..'_Border']:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\ButtonBorder');
@@ -468,9 +467,9 @@ function SphereButtons:ButtonSetIcon(buttonId, texture)
         else
 		--buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..texture)
 		 buttonTexture:SetTexture(texture)
-		 buttonTexture:SetMask('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\Mask')
+		-- buttonTexture:SetMask('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\Mask')
 		
-		--SetPortraitToTexture(buttonTexture, texture)
+		SetPortraitToTexture(buttonTexture, texture)
 		 buttonTexture:SetScale(0.5)
 		
 		end
@@ -622,7 +621,7 @@ end
 -- set a button position and size
 function SphereButtons:ButtonSetPosition(buttonName, buttonPos)
     local scale = Venantes.db.profile.buttonScale * Venantes.db.profile.sphereScale / 10000;
-    local distanceOffset = 48;
+    local distanceOffset = 42;--48
     local distance = distanceOffset;
     
     if Venantes.db.profile.buttonScale < 100 then
@@ -635,11 +634,25 @@ function SphereButtons:ButtonSetPosition(buttonName, buttonPos)
     end
     
     local button = _G[self.buttons.prefix..'Button'..buttonName];
-    if button ~= nil then
+    
+	print (button:GetName(), button:GetWidth(),button:GetHeight())
+	if button ~= nil then
         _G[self.buttons.prefix..'Button'..buttonName..'_Border']:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\ButtonBorder');
         button:SetHighlightTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\ButtonHighlight');
         button:SetAlpha(Venantes.db.profile.buttonOpacity / 100);
-        if Venantes.db.profile.buttonLocking then
+
+
+
+        if buttonName == "AspectMenu" or buttonName == "TrackingMenu" or buttonName == "TrapsMenu" then
+		button:SetHeight(32)
+		button:SetWidth(32)
+		else
+		button:SetHeight(24)
+		button:SetWidth(24)
+		end
+				
+		
+		if Venantes.db.profile.buttonLocking then
             local buttonDegree = ((buttonPos * 36) + Venantes.db.profile.sphereRotation + rotationOffset);
             if not Venantes.db.profile.buttonOrderCCW then
                 buttonDegree = 360 - buttonDegree;
@@ -703,7 +716,7 @@ function SphereButtons:OnDragStart(element)
 end
 
 function SphereButtons:OnDragStop(element)
-	print(element , element:GetName())
+	--print(element , element:GetName())
    element:StopMovingOrSizing();
     if not InCombatLockdown() then
         if (not Venantes.db.profile.buttonLocking) and Venantes.db.profile.buttonsUseGrid then
