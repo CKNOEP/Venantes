@@ -42,7 +42,8 @@ function SphereButtons:ButtonSetup(buttonPrefix, buttonWidgets)--setup des bouto
             textureBorder:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\'..self.buttons.skin..'\\ButtonBorder');
             textureBorder:SetWidth(button:GetWidth());
             textureBorder:SetHeight(button:GetHeight());
-           -- print(button:GetWidth(),button:GetHeight())
+			print ("SetupB",button:GetWidth(),button:GetHeight())
+            --print(button:GetWidth(),button:GetHeight())
 			textureBorder:SetPoint('CENTER', button, 'CENTER', 0, 0);
         end
     end
@@ -463,20 +464,23 @@ function SphereButtons:ButtonSetIcon(buttonId, texture)
 		elseif not buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..texture) then            
             --buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\WoWUnknownItem01');
             buttonTexture:SetTexture(texture)
-			self:DebugTexture(texture);
+			--self:DebugTexture(texture);
         else
 		--buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..texture)
-		--buttonTexture:SetTexture(texture)
+		 buttonTexture:SetTexture(texture)
+		 buttonTexture:SetMask('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\Mask')
 		
-		SetPortraitToTexture(buttonTexture, texture)
+		--SetPortraitToTexture(buttonTexture, texture)
+		 buttonTexture:SetScale(0.5)
+		
 		end
     --print("GT ",buttonTexture:GetName(),buttonTexture:GetTexture(),buttonTexture:GetTextureFilePath() )
 	end
 		if buttonId == "Potion" then
 	--print ("popo")
 	--buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\WoWUnknownItem01');
-	buttonTexture:SetWidth(16)
-	buttonTexture:SetHeight(16)
+	--buttonTexture:SetWidth(32)
+	--buttonTexture:SetHeight(32)
 	end
 	-- print ("tex",buttonId,texture,buttonTexture:GetWidth())
 	
