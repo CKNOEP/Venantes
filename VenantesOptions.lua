@@ -259,7 +259,7 @@ function VenantesOptions:ShowTooltip(element, elementId, anchor)
 				local namespell_name = select(1,GetSpellInfo(spell_name))
 		   
 				if name == namespell_name then
-				print(i, j, GetSpellBookItemInfo(j, BOOKTYPE_SPELL),name,namespell_name)
+				--print(i, j, GetSpellBookItemInfo(j, BOOKTYPE_SPELL),name,namespell_name)
 				ID_BOOKTYPE_SPELL = j
 				end
 				
