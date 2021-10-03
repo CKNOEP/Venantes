@@ -1,0 +1,1656 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+	<CheckButton name="VenantesOptionsTabTemplate" virtual="true" hidden="false">
+		<Size>
+			<AbsDimension x="32" y="32"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\SpellBook\SpellBook-SkillLineTab">
+					<Size>
+						<AbsDimension x="64" y="64"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="-3" y="11"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<NormalTexture/>
+		<HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD"/>
+		<CheckedTexture file="Interface\Buttons\CheckButtonHilight" alphaMode="ADD"/>
+	</CheckButton>
+
+    <Frame name="VenantesOptionsFrame" frameStrata="DIALOG"  movable="true" enableMouse="true" hidden="true" parent="UIParent">
+		<Size>
+			<AbsDimension x="384" y="512"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="0" y="-104"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<HitRectInsets>
+			<AbsInset left="0" right="34" top="0" bottom="75"/>
+		</HitRectInsets>
+        <Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="VenantesFramePortrait" file="Interface\MacroFrame\MacroFrame-Icon">
+					<Size>
+						<AbsDimension x="60" y="60"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="7" y="-6"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="BORDER">
+				<Texture file="Interface\PaperDollInfoFrame\UI-Character-General-TopLeft">
+					<Size>
+						<AbsDimension x="256" y="256"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+				</Texture>
+				<Texture file="Interface\PaperDollInfoFrame\UI-Character-General-TopRight">
+					<Size>
+						<AbsDimension x="128" y="256"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT"/>
+					</Anchors>
+				</Texture>
+				<Texture file="Interface\PaperDollInfoFrame\SkillFrame-BotLeft">
+					<Size>
+						<AbsDimension x="256" y="256"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT"/>
+					</Anchors>
+				</Texture>
+				<Texture file="Interface\PaperDollInfoFrame\SkillFrame-BotRight">
+					<Size>
+						<AbsDimension x="128" y="256"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT"/>
+					</Anchors>
+				</Texture>
+            </Layer>
+            <Layer level="OVERLAY">
+				<Texture name="VenantesOptionsFrameSubTitleLeft" file="Interface\Common\Common-Input-Border">
+					<Size>
+						<AbsDimension x="8" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrame">
+							<Offset>
+								<AbsDimension x="75" y="-48"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
+				</Texture>
+				<Texture name="VenantesOptionsFrameSubTitleMiddle" file="Interface\Common\Common-Input-Border">
+					<Size>
+						<AbsDimension x="248" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="VenantesOptionsFrameSubTitleLeft" relativePoint="RIGHT"/>
+					</Anchors>
+					<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
+				</Texture>
+				<Texture name="VenantesOptionsFrameSubTitleRight" file="Interface\Common\Common-Input-Border">
+					<Size>
+						<AbsDimension x="8" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="VenantesOptionsFrameSubTitleMiddle" relativePoint="RIGHT"/>
+					</Anchors>
+					<TexCoords left="0.9375" right="1.0" top="0" bottom="0.625"/>
+				</Texture>
+
+				<FontString name="VenantesOptionsFrameSubTitleText" inherits="GameFontNormal">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="VenantesOptionsFrame" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="-52"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+                
+				<FontString name="VenantesOptionsFrameTitleText" inherits="GameFontNormal" text="Venantes Options">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="VenantesOptionsFrame" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-17"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+        </Layers>
+		<Frames>
+            <Button name="VenantesOptionsFrameCloseButton1" inherits="UIPanelCloseButton">
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativeto="VenantesOptionsFrame" relativepoint="TOPRIGHT">
+                        <Offset>
+                            <AbsDimension x="-29" y="-8"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            
+			<Button name="VenantesOptionsFrameCloseButton2" inherits="UIPanelButtonTemplate" text="CLOSE">
+				<Size>
+					<AbsDimension x="80" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="VenantesOptionsFrame" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="302" y="-420"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HideUIPanel(VenantesOptionsFrame);
+					</OnClick>
+				</Scripts>
+			</Button>
+            
+			<CheckButton name="VenantesOptionsTabSphere" inherits="VenantesOptionsTabTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-35" y="-65"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+                        VenantesOptions:ShowTooltip(VenantesOptionsTabSphere, "TAB_SPHERE", "ANCHOR_RIGHT");
+					</OnEnter>
+                    <OnLeave>
+                        VenantesOptions:HideTooltip();
+                    </OnLeave>
+					<OnClick>
+                        VenantesOptions:TabButtonClick("Sphere", "TAB_SPHERE");
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\INV_Ore_Arcanite_01"/>
+			</CheckButton>
+			<CheckButton name="VenantesOptionsTabButtons" inherits="VenantesOptionsTabTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="VenantesOptionsTabSphere" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-17"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+                        VenantesOptions:ShowTooltip(VenantesOptionsTabButtons, "TAB_BUTTONS", "ANCHOR_RIGHT");
+					</OnEnter>
+                    <OnLeave>
+                        VenantesOptions:HideTooltip();
+                    </OnLeave>
+					<OnClick>
+                        VenantesOptions:TabButtonClick("Buttons", "TAB_BUTTONS");
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\INV_Misc_Rune_01"/>
+			</CheckButton>
+			<CheckButton name="VenantesOptionsTabMessages" inherits="VenantesOptionsTabTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="VenantesOptionsTabButtons" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-17"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+                        VenantesOptions:ShowTooltip(VenantesOptionsTabMessages, "TAB_MESSAGES", "ANCHOR_RIGHT");
+					</OnEnter>
+                    <OnLeave>
+                        VenantesOptions:HideTooltip();
+                    </OnLeave>
+					<OnClick>
+                        VenantesOptions:TabButtonClick("Messages", "TAB_MESSAGES");
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\INV_Letter_06"/>
+			</CheckButton>
+			<CheckButton name="VenantesOptionsTabInventory" inherits="VenantesOptionsTabTemplate" hidden="true">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="VenantesOptionsTabMessages" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-17"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+                        VenantesOptions:ShowTooltip(VenantesOptionsTabInventory, "TAB_INVENTORY", "ANCHOR_RIGHT");
+					</OnEnter>
+                    <OnLeave>
+                        VenantesOptions:HideTooltip();
+                    </OnLeave>
+					<OnClick>
+                        VenantesOptions:TabButtonClick("Inventory", "TAB_INVENTORY");
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\INV_Misc_Bag_08"/>
+			</CheckButton>
+			<CheckButton name="VenantesOptionsTabDebug" inherits="VenantesOptionsTabTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="VenantesOptionsTabInventory" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-17"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+                        VenantesOptions:ShowTooltip(VenantesOptionsTabDebug, "TAB_DEBUG", "ANCHOR_RIGHT");
+					</OnEnter>
+                    <OnLeave>
+                        VenantesOptions:HideTooltip();
+                    </OnLeave>
+					<OnClick>
+                        VenantesOptions:TabButtonClick("Debug", "TAB_DEBUG");
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\INV_Scarab_Stone"/>
+			</CheckButton>
+            
+            <Frame name="VenantesOptionsFrameMessages" frameStrata="DIALOG" movable="false" enableMouse="true" toplevel="true" hidden="true">
+                <Size>
+                    <AbsDimension x="320" y="330"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrame" relativeFrom="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="20" y="-75"/>
+                        </Offset>            
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <FontString name="VenantesOptionsLabel_OnScreen" inherits="GameFontNormalSmall" text="MESSAGES_ONSCREEN">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="30" y="-10"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_Raid" inherits="GameFontNormalSmall" text="MESSAGES_RAID">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="30" y="-60"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_MsgRandom" inherits="GameFontNormalSmall" text="MESSAGES_RANDOM">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="30" y="-110"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_MsgRandomHuntersMark" inherits="GameFontNormalSmall" text="MESSAGES_RANDOM_HUNTERSMARK">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="50" y="-130"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_MsgRandomTranqShot" inherits="GameFontNormalSmall" text="MESSAGES_RANDOM_TRANQSHOT">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="50" y="-150"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_MsgRandomPetCall" inherits="GameFontNormalSmall" text="MESSAGES_RANDOM_PETCALL">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="50" y="-170"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_MsgRandomPetRevive" inherits="GameFontNormalSmall" text="MESSAGES_RANDOM_PETREVIVE">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="50" y="-190"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_MsgRandomMount" inherits="GameFontNormalSmall" text="MESSAGES_RANDOM_MOUNT">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="50" y="-210"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Frames>			
+                    <CheckButton name="VenantesOptionsCheckButton_OnScreen" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="5" y="-5"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_OnScreen, 'messagesOnScreen');
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_Raid" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="5" y="-55"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_Raid, 'messagesRaidMode');
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_MsgRandom" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="5" y="-105"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_MsgRandom, 'messagesRandom');
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_MsgRandomHuntersMark" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="25" y="-125"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_MsgRandomHuntersMark, 'messagesRandomHuntersMark');
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_MsgRandomTranqShot" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="25" y="-145"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_MsgRandomTranqShot, 'messagesRandomTranqShot');
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_MsgRandomPetCall" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="25" y="-165"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_MsgRandomPetCall, 'messagesRandomPetCall');
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_MsgRandomPetRevive" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="25" y="-185"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_MsgRandomPetRevive, 'messagesRandomPetRevive');
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_MsgRandomMount" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="25" y="-205"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_MsgRandomMount, 'messagesRandomMount');
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <Slider name="VenantesOptionsSlider_MsgRandomLanguage" inherits="OptionsSliderTemplate" minValue="0" maxValue="4" valueStep="1" virtual="true">
+                        <Size>
+                            <AbsDimension x="160" y="16"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOP" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOP">
+                                <Offset>
+                                    <AbsDimension x="0" y="-255"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnter>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_MsgRandomLanguage, 'MSG_LANGUAGE', 'ANCHOR_CURSOR');
+                            </OnEnter>
+                            <OnLeave>
+                                VenantesOptions:HideTooltip();
+                            </OnLeave>
+                            <OnValueChanged>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_MsgRandomLanguage, 'MSG_LANGUAGE', 'ANCHOR_CURSOR');
+                                VenantesOptions:SetOptionSlider(VenantesOptionsSlider_MsgRandomLanguage, 'messagesLanguage');
+                            </OnValueChanged>
+                        </Scripts>
+                    </Slider>
+                </Frames>
+            </Frame>
+            
+            <Frame name="VenantesOptionsFrameButtons" frameStrata="DIALOG" movable="false" enableMouse="true" toplevel="true" hidden="true">
+                <Size>
+                    <AbsDimension x="320" y="330"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrame" relativeFrom="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="20" y="-75"/>
+                        </Offset>            
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <FontString name="VenantesOptionsLabel_ShowButtons" inherits="GameFontNormalSmall" text="SHOW_BUTTONS">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="10" y="-10"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_Drink" inherits="GameFontNormalSmall" text="BUTTON_DRINK_FOOD">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="30" y="-30"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_DrinkWeakest" inherits="GameFontNormalSmall" text="BUTTON_USE_WEAKEST">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="180" y="-30"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_Potion" inherits="GameFontNormalSmall" text="BUTTON_POTION">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="30" y="-50"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_PotionWeakest" inherits="GameFontNormalSmall" text="BUTTON_USE_WEAKEST">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="180" y="-50"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_Mount" inherits="GameFontNormalSmall" text="BUTTON_MOUNT">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="30" y="-70"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_PetMenu" inherits="GameFontNormalSmall" text="BUTTON_PETMENU">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="30" y="-90"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_AspectMenu" inherits="GameFontNormalSmall" text="BUTTON_ASPECTMENU">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="30" y="-110"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_TrackingMenu" inherits="GameFontNormalSmall" text="BUTTON_TRACKINGMENU">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="180" y="-90"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_TrapsMenu" inherits="GameFontNormalSmall" text="BUTTON_TRAPSMENU">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="180" y="-110"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_ActionOne" inherits="GameFontNormalSmall" text="BUTTON_ACTION_ONE">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="30" y="-145"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_ActionTwo" inherits="GameFontNormalSmall" text="BUTTON_ACTION_TWO">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="30" y="-205"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_ActionThree" inherits="GameFontNormalSmall" text="BUTTON_ACTION_THREE">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="30" y="-265"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Frames>			
+                    <CheckButton name="VenantesOptionsCheckButton_Drink" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="5" y="-25"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_Drink, 'buttonDrinkVisible');
+                                VenantesOptions:Invalidate(VenantesOptionsCheckButton_Drink, true, false);
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_DrinkWeakest" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="20" y="20"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="157" y="-27"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_DrinkWeakest, 'buttonDrinkWeakest');
+                                VenantesOptions:InventoryScan();
+                                VenantesOptions:Invalidate(true, true, false);
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_Potion" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="5" y="-45"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_Potion, 'buttonPotionVisible');
+                                VenantesOptions:Invalidate(true, true, false);
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_PotionWeakest" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="20" y="20"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="157" y="-47"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_PotionWeakest, 'buttonPotionWeakest');
+                                VenantesOptions:InventoryScan();
+                                VenantesOptions:Invalidate(true, true, false);
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_Mount" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="5" y="-65"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_Mount, 'buttonMountVisible');
+                                VenantesOptions:Invalidate(true, true, false);
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_PetMenu" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="5" y="-85"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_PetMenu, 'buttonPetMenuVisible');
+                                VenantesOptions:Invalidate(true, true, false);
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_AspectMenu" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="5" y="-105"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_AspectMenu, 'buttonAspectMenuVisible');
+                                VenantesOptions:Invalidate(true, true, false);
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_TrackingMenu" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="155" y="-85"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_TrackingMenu, 'buttonTrackingMenuVisible');
+                                VenantesOptions:Invalidate(true, true, false);
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_TrapsMenu" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="155" y="-105"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_TrapsMenu, 'buttonTrapsMenuVisible');
+                                VenantesOptions:Invalidate(true, true, false);
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_ActionOne" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="5" y="-140"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_ActionOne, 'buttonActionOneVisible');
+                                VenantesOptions:Invalidate(true, true, false);
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <Slider name="VenantesOptionsSlider_ActionOneLeft" inherits="OptionsSliderTemplate" minValue="0" maxValue="20" valueStep="1" virtual="true">
+                        <Size>
+                            <AbsDimension x="140" y="16"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="10" y="-175"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnter>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_ActionOneLeft, 'ACTION_VALUE', 'ANCHOR_CURSOR');
+                            </OnEnter>
+                            <OnLeave>
+                                VenantesOptions:HideTooltip();
+                            </OnLeave>
+                            <OnValueChanged>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_ActionOneLeft, 'ACTION_VALUE', 'ANCHOR_CURSOR');
+                                VenantesOptions:SetOptionSlider(VenantesOptionsSlider_ActionOneLeft, 'buttonActionOneLeft');
+                                VenantesOptions:Invalidate(true, false, false);
+                            </OnValueChanged>
+                        </Scripts>
+                    </Slider>
+                    <Slider name="VenantesOptionsSlider_ActionOneRight" inherits="OptionsSliderTemplate" minValue="0" maxValue="20" valueStep="1" virtual="true">
+                        <Size>
+                            <AbsDimension x="140" y="16"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="160" y="-175"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnter>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_ActionOneRight, 'ACTION_VALUE', 'ANCHOR_CURSOR');
+                            </OnEnter>
+                            <OnLeave>
+                                VenantesOptions:HideTooltip();
+                            </OnLeave>
+                            <OnValueChanged>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_ActionOneRight, 'ACTION_VALUE', 'ANCHOR_CURSOR');
+                                VenantesOptions:SetOptionSlider(VenantesOptionsSlider_ActionOneRight, 'buttonActionOneRight');
+                                VenantesOptions:Invalidate(true, false, false);
+                            </OnValueChanged>
+                        </Scripts>
+                    </Slider>
+                    
+                    <CheckButton name="VenantesOptionsCheckButton_ActionTwo" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="5" y="-200"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_ActionTwo, 'buttonActionTwoVisible');
+                                VenantesOptions:Invalidate(true, true, false);
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <Slider name="VenantesOptionsSlider_ActionTwoLeft" inherits="OptionsSliderTemplate" minValue="0" maxValue="20" valueStep="1" virtual="true">
+                        <Size>
+                            <AbsDimension x="140" y="16"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="10" y="-235"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnter>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_ActionTwoLeft, 'ACTION_VALUE', 'ANCHOR_CURSOR');
+                            </OnEnter>
+                            <OnLeave>
+                                VenantesOptions:HideTooltip();
+                            </OnLeave>
+                            <OnValueChanged>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_ActionTwoLeft, 'ACTION_VALUE', 'ANCHOR_CURSOR');
+                                VenantesOptions:SetOptionSlider(VenantesOptionsSlider_ActionTwoLeft, 'buttonActionTwoLeft');
+                                VenantesOptions:Invalidate(true, false, false);
+                            </OnValueChanged>
+                        </Scripts>
+                    </Slider>
+                    <Slider name="VenantesOptionsSlider_ActionTwoRight" inherits="OptionsSliderTemplate" minValue="0" maxValue="20" valueStep="1" virtual="true">
+                        <Size>
+                            <AbsDimension x="140" y="16"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="160" y="-235"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnter>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_ActionTwoRight, 'ACTION_VALUE', 'ANCHOR_CURSOR');
+                            </OnEnter>
+                            <OnLeave>
+                                VenantesOptions:HideTooltip();
+                            </OnLeave>
+                            <OnValueChanged>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_ActionTwoRight, 'ACTION_VALUE', 'ANCHOR_CURSOR');
+                                VenantesOptions:SetOptionSlider(VenantesOptionsSlider_ActionTwoRight, 'buttonActionTwoRight');
+                                VenantesOptions:Invalidate(true, false, false);
+                            </OnValueChanged>
+                        </Scripts>
+                    </Slider>
+                    
+                    <CheckButton name="VenantesOptionsCheckButton_ActionThree" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="5" y="-260"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_ActionThree, 'buttonActionThreeVisible');
+                                VenantesOptions:Invalidate(VenantesOptionsCheckButton_ActionThree, true, false);
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <Slider name="VenantesOptionsSlider_ActionThreeLeft" inherits="OptionsSliderTemplate" minValue="0" maxValue="20" valueStep="1" virtual="true">
+                        <Size>
+                            <AbsDimension x="140" y="16"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="10" y="-295"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnter>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_ActionThreeLeft, 'ACTION_VALUE', 'ANCHOR_CURSOR');
+                            </OnEnter>
+                            <OnLeave>
+                                VenantesOptions:HideTooltip();
+                            </OnLeave>
+                            <OnValueChanged>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_ActionThreeLeft, 'ACTION_VALUE', 'ANCHOR_CURSOR');
+                                VenantesOptions:SetOptionSlider(VenantesOptionsSlider_ActionThreeLeft, 'buttonActionThreeLeft');
+                                VenantesOptions:Invalidate(true, false, false);
+                            </OnValueChanged>
+                        </Scripts>
+                    </Slider>
+                    <Slider name="VenantesOptionsSlider_ActionThreeRight" inherits="OptionsSliderTemplate" minValue="0" maxValue="20" valueStep="1" virtual="true">
+                        <Size>
+                            <AbsDimension x="140" y="16"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameButtons" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="160" y="-295"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnter>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_ActionThreeRight, 'ACTION_VALUE', 'ANCHOR_CURSOR');
+                            </OnEnter>
+                            <OnLeave>
+                                VenantesOptions:HideTooltip();
+                            </OnLeave>
+                            <OnValueChanged>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_ActionThreeRight, 'ACTION_VALUE', 'ANCHOR_CURSOR');
+                                VenantesOptions:SetOptionSlider(VenantesOptionsSlider_ActionThreeRight, 'buttonActionThreeRight');
+                                VenantesOptions:Invalidate(true, false, false);
+                            </OnValueChanged>
+                        </Scripts>
+                    </Slider>
+                </Frames>
+            </Frame>
+             
+            <Frame name="VenantesOptionsFrameInventory" frameStrata="DIALOG" movable="false" enableMouse="true" toplevel="true" hidden="true">
+                <Size>
+                    <AbsDimension x="320" y="330"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrame" relativeFrom="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="20" y="-75"/>
+                        </Offset>            
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <FontString name="VenantesOptionsLabel_RestackAmmo" inherits="GameFontNormalSmall" text="RESTACK_AMMO">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameInventory" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="30" y="-10"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Frames>			
+                </Frames>
+            </Frame>
+             
+            <Frame name="VenantesOptionsFrameSphere" frameStrata="DIALOG" movable="false" enableMouse="true" toplevel="true" hidden="true">
+                <Size>
+                    <AbsDimension x="320" y="330"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrame" relativeFrom="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="20" y="-75"/>
+                        </Offset>            
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <FontString name="VenantesOptionsLabel_LockSphere" inherits="GameFontNormalSmall" text="LOCK_SPHERE">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameSphere" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="30" y="-10"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_LockButtons" inherits="GameFontNormalSmall" text="LOCK_BUTTONS">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameSphere" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="30" y="-30"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_ButtonOrderCCW" inherits="GameFontNormalSmall" text="BUTTON_ORDERCCW">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameSphere" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="30" y="-50"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_Tooltips" inherits="GameFontNormalSmall" text="MESSAGES_TOOLTIPS">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="30" y="-260"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_DefaultTooltips" inherits="GameFontNormalSmall" text="MESSAGES_TOOLTIPS_DEFAULTPOS">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="30" y="-280"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_MenuKeepOpen" inherits="GameFontNormalSmall" text="MENU_KEEPOPEN">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="30" y="-300"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Frames>			
+                    <CheckButton name="VenantesOptionsCheckButton_SphereLocking" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameSphere" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="5" y="-5"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_SphereLocking, 'sphereLocking');
+                                VenantesOptions:Invalidate(true, true, true);
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_ButtonLocking" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameSphere" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="5" y="-25"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_ButtonLocking, 'buttonLocking');
+                                VenantesOptions:Invalidate(true, true, true);
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_ButtonOrderCCW" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameSphere" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="5" y="-45"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_ButtonOrderCCW, 'buttonOrderCCW');
+                                VenantesOptions:Invalidate(true, true, true);
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <Slider name="VenantesOptionsSlider_SphereSkin" inherits="OptionsSliderTemplate" minValue="1" maxValue="1" valueStep="1" virtual="true">
+                        <Size>
+                            <AbsDimension x="140" y="16"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameSphere" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="10" y="-95"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnter>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_SphereSkin, 'SKIN', 'ANCHOR_CURSOR');
+                            </OnEnter>
+                            <OnLeave>
+                                VenantesOptions:HideTooltip();
+                            </OnLeave>
+                            <OnValueChanged>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_SphereSkin, 'SKIN', 'ANCHOR_CURSOR');
+                                VenantesOptions:SetOptionSlider(VenantesOptionsSlider_SphereSkin, 'sphereSkin');
+                                VenantesOptions:Invalidate(false, true, false);
+                            </OnValueChanged>
+                        </Scripts>
+                    </Slider>
+                    <Slider name="VenantesOptionsSlider_SphereRotation" inherits="OptionsSliderTemplate" minValue="0" maxValue="360" valueStep="18" virtual="true">
+                        <Size>
+                            <AbsDimension x="140" y="16"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameSphere" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="160" y="-95"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnter>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_SphereRotation, 'VALUE', 'ANCHOR_CURSOR');
+                            </OnEnter>
+                            <OnLeave>
+                                VenantesOptions:HideTooltip();
+                            </OnLeave>
+                            <OnValueChanged>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_SphereRotation, 'VALUE', 'ANCHOR_CURSOR');
+                                VenantesOptions:SetOptionSlider(VenantesOptionsSlider_SphereRotation, 'sphereRotation');
+                                VenantesOptions:Invalidate(false, true, false);
+                            </OnValueChanged>
+                        </Scripts>
+                    </Slider>
+                    <Slider name="VenantesOptionsSlider_SphereOpacity" inherits="OptionsSliderTemplate" minValue="0" maxValue="100" valueStep="5" virtual="true">
+                        <Size>
+                            <AbsDimension x="140" y="16"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameSphere" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="10" y="-130"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnter>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_SphereOpacity, 'VALUE', 'ANCHOR_CURSOR');
+                            </OnEnter>
+                            <OnLeave>
+                                VenantesOptions:HideTooltip();
+                            </OnLeave>
+                            <OnValueChanged>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_SphereOpacity, 'VALUE', 'ANCHOR_CURSOR');
+                                VenantesOptions:SetOptionSlider(VenantesOptionsSlider_SphereOpacity, 'sphereOpacity');
+                                VenantesOptions:Invalidate(false, VenantesOptionsSlider_SphereOpacity, false);
+                            </OnValueChanged>
+                        </Scripts>
+                    </Slider>
+                    <Slider name="VenantesOptionsSlider_ButtonOpacity" inherits="OptionsSliderTemplate" minValue="50" maxValue="100" valueStep="5" virtual="true">
+                        <Size>
+                            <AbsDimension x="140" y="16"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameSphere" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="160" y="-130"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnter>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_ButtonOpacity, 'VALUE', 'ANCHOR_CURSOR');
+                            </OnEnter>
+                            <OnLeave>
+                                VenantesOptions:HideTooltip();
+                            </OnLeave>
+                            <OnValueChanged>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_ButtonOpacity, 'VALUE', 'ANCHOR_CURSOR');
+                                VenantesOptions:SetOptionSlider(VenantesOptionsSlider_ButtonOpacity, 'buttonOpacity');
+                                VenantesOptions:Invalidate(false, true, false);
+                            </OnValueChanged>
+                        </Scripts>
+                    </Slider>
+                    <Slider name="VenantesOptionsSlider_SphereScale" inherits="OptionsSliderTemplate" minValue="50" maxValue="150" valueStep="5" virtual="true">
+                        <Size>
+                            <AbsDimension x="140" y="16"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameSphere" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="10" y="-165"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnter>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_SphereScale, 'VALUE', 'ANCHOR_CURSOR');
+                            </OnEnter>
+                            <OnLeave>
+                                VenantesOptions:HideTooltip();
+                            </OnLeave>
+                            <OnValueChanged>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_SphereScale, 'VALUE', 'ANCHOR_CURSOR');
+                                VenantesOptions:SetOptionSlider(VenantesOptionsSlider_SphereScale, 'sphereScale');
+                                VenantesOptions:Invalidate(false, true, false);
+                            </OnValueChanged>
+                        </Scripts>
+                    </Slider>
+                    <Slider name="VenantesOptionsSlider_ButtonScale" inherits="OptionsSliderTemplate" minValue="100" maxValue="200" valueStep="5" virtual="true">
+                        <Size>
+                            <AbsDimension x="140" y="16"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameSphere" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="160" y="-165"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnter>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_ButtonScale, 'VALUE', 'ANCHOR_CURSOR');
+                            </OnEnter>
+                            <OnLeave>
+                                VenantesOptions:HideTooltip();
+                            </OnLeave>
+                            <OnValueChanged>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_ButtonScale, 'VALUE', 'ANCHOR_CURSOR');
+                                VenantesOptions:SetOptionSlider(VenantesOptionsSlider_ButtonScale, 'buttonScale');
+                                VenantesOptions:Invalidate(false, true, false);
+                            </OnValueChanged>
+                        </Scripts>
+                    </Slider>
+                    <Slider name="VenantesOptionsSlider_SphereCircle" inherits="OptionsSliderTemplate" minValue="0" maxValue="20" valueStep="1" virtual="true">
+                        <Size>
+                            <AbsDimension x="140" y="16"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameSphere" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="10" y="-200"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnter>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_SphereCircle, 'SPHERE_CIRCLE', 'ANCHOR_CURSOR');
+                            </OnEnter>
+                            <OnLeave>
+                                VenantesOptions:HideTooltip();
+                            </OnLeave>
+                            <OnValueChanged>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_SphereCircle, 'SPHERE_CIRCLE', 'ANCHOR_CURSOR');
+                                VenantesOptions:SetOptionSlider(VenantesOptionsSlider_SphereCircle, 'sphereStatusCircle');
+                                VenantesOptions:Invalidate(false, false, false);
+                            </OnValueChanged>
+                        </Scripts>
+                    </Slider>
+                    <Slider name="VenantesOptionsSlider_SphereText" inherits="OptionsSliderTemplate" minValue="0" maxValue="20" valueStep="1" virtual="true">
+                        <Size>
+                            <AbsDimension x="140" y="16"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameSphere" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="160" y="-200"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnter>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_SphereText, 'SPHERE_TEXT', 'ANCHOR_CURSOR');
+                            </OnEnter>
+                            <OnLeave>
+                                VenantesOptions:HideTooltip();
+                            </OnLeave>
+                            <OnValueChanged>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_SphereText, 'SPHERE_TEXT', 'ANCHOR_CURSOR');
+                                VenantesOptions:SetOptionSlider(VenantesOptionsSlider_SphereText, 'sphereStatusText');
+                                VenantesOptions:Invalidate(false, false, false);
+                            </OnValueChanged>
+                        </Scripts>
+                    </Slider>
+                    <Slider name="VenantesOptionsSlider_SphereActionLeft" inherits="OptionsSliderTemplate" minValue="0" maxValue="20" valueStep="1" virtual="true">
+                        <Size>
+                            <AbsDimension x="140" y="16"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameSphere" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="10" y="-235"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnter>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_SphereActionLeft, 'ACTION_VALUE', 'ANCHOR_CURSOR');
+                            </OnEnter>
+                            <OnLeave>
+                                VenantesOptions:HideTooltip();
+                            </OnLeave>
+                            <OnValueChanged>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_SphereActionLeft, 'ACTION_VALUE', 'ANCHOR_CURSOR');
+                                VenantesOptions:SetOptionSlider(VenantesOptionsSlider_SphereActionLeft, 'sphereActionLeft');
+                                VenantesOptions:Invalidate(true, false, false);
+                            </OnValueChanged>
+                        </Scripts>
+                    </Slider>
+                    <Slider name="VenantesOptionsSlider_SphereActionRight" inherits="OptionsSliderTemplate" minValue="0" maxValue="20" valueStep="1" virtual="true">
+                        <Size>
+                            <AbsDimension x="140" y="16"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameSphere" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="160" y="-235"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnter>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_SphereActionRight, 'ACTION_VALUE', 'ANCHOR_CURSOR');
+                            </OnEnter>
+                            <OnLeave>
+                                VenantesOptions:HideTooltip();
+                            </OnLeave>
+                            <OnValueChanged>
+                                VenantesOptions:ShowTooltip(VenantesOptionsSlider_SphereActionRight, 'ACTION_VALUE', 'ANCHOR_CURSOR');
+                              
+								VenantesOptions:SetOptionSlider(VenantesOptionsSlider_SphereActionRight, 'sphereActionRight');
+                                VenantesOptions:Invalidate(true, false, false);
+                            </OnValueChanged>
+                        </Scripts>
+                    </Slider>
+                    <CheckButton name="VenantesOptionsCheckButton_Tooltips" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="5" y="-255"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_Tooltips, 'buttonTooltips');
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_DefaultTooltips" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="5" y="-275"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_DefaultTooltips, 'buttonDefaultTooltips');
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                    <CheckButton name="VenantesOptionsCheckButton_MenuKeepOpen" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameMessages" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="5" y="-295"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_MenuKeepOpen, 'menuKeepOpen');
+                                VenantesOptions:Invalidate(true, true, true);
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                </Frames>
+            </Frame>
+            
+            <Frame name="VenantesOptionsFrameDebug" frameStrata="DIALOG" movable="false" enableMouse="true" toplevel="true" hidden="true">
+                <Size>
+                    <AbsDimension x="320" y="330"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrame" relativeFrom="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="20" y="-75"/>
+                        </Offset>            
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <FontString name="VenantesOptionsDebugItemTitle" inherits="GameFontNormalSmall" text="DEBUG_ITEMDROP">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameDebug" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="72" y="-15"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsDebugTexture" inherits="GameFontNormalSmall" text="DEBUG_TEXTURES">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameDebug" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="15" y="-75"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="VenantesOptionsLabel_DebugTexture" inherits="GameFontNormalSmall" text="MESSAGES_TEXTURE_DEBUG">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameDebug" relativeFrom="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="35" y="-130"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Frames>		
+                    <CheckButton name="VenantesOptionsDebugItem" checked="false">
+                        <Size>
+                            <AbsDimension x="64" y="64"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameDebug" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="5" y="-5"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Layers>
+                            <Layer level="BACKGROUND">
+                                <Texture name="$parentBackground" file="Interface\Buttons\UI-EmptySlot"/>
+                            </Layer>
+                            <Layer level="ARTWORK">
+                                <Texture name="$parentIcon">
+                                    <Size>
+                                        <AbsDimension x="37" y="37"/>
+                                    </Size>
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativeTo="$parent" relativeFrom="CENTER"/>
+                                    </Anchors>
+                                </Texture>
+                            </Layer>
+                        </Layers>
+                        <Scripts>
+                            <OnLoad>
+                                VenantesOptionsDebugItem:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+                            </OnLoad>
+                            <OnClick>
+                                VenantesOptions:OnDebugItemDrop();
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton> 
+                    <EditBox name="VenantesOptionsDebugItemEdit">
+                        <Size>
+                            <AbsDimension x="235" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameDebug" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="70" y="-32"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>    
+                        <Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+                            <EdgeSize>
+                                <AbsValue val="16"/>
+                            </EdgeSize>
+                            <TileSize>
+                                <AbsValue val="32"/>
+                            </TileSize>
+                            <BackgroundInsets>
+                                <AbsInset left="5" right="5" top="5" bottom="5"/>
+                            </BackgroundInsets>
+                        </Backdrop>
+                        <TextInsets>
+                            <AbsInset left="10" right="5" top="5" bottom="5"/>
+                        </TextInsets>
+                        <FontString inherits="GameFontNormal"/>
+                    </EditBox>
+                    <EditBox name="VenantesOptionsDebugTextureMsgs">
+                        <Size>
+                            <AbsDimension x="290" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameDebug" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="15" y="-90"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>    
+                        <Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+                            <EdgeSize>
+                                <AbsValue val="16"/>
+                            </EdgeSize>
+                            <TileSize>
+                                <AbsValue val="32"/>
+                            </TileSize>
+                            <BackgroundInsets>
+                                <AbsInset left="5" right="5" top="5" bottom="5"/>
+                            </BackgroundInsets>
+                        </Backdrop>
+                        <TextInsets>
+                            <AbsInset left="10" right="5" top="5" bottom="5"/>
+                        </TextInsets>
+                        <FontString inherits="GameFontNormal"/>                    
+                    </EditBox>
+                    <CheckButton name="VenantesOptionsCheckButton_DebugTexture" enableMouse="true" inherits="UICheckButtonTemplate" checked="false">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="VenantesOptionsFrameDebug" relativeFrom="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="10" y="-125"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                VenantesOptions:SetOptionCheckbox(VenantesOptionsCheckButton_DebugTexture, 'messagesMissingTexture');
+                            </OnClick>
+                        </Scripts>
+                    </CheckButton>
+                </Frames>
+            </Frame>
+        </Frames>
+        <Scripts>
+			<OnDragStart>
+				VenantesOptionsFrame:StartMoving();
+			</OnDragStart>
+			<OnDragStop>
+                VenantesOptionsFrame:StopMovingOrSizing();
+			</OnDragStop>
+        </Scripts>
+   </Frame>
+</Ui>

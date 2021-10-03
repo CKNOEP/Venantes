@@ -40,4 +40,7 @@ Speech-zhTW.lua
 
 Venantes.xml
 Venantes.lua
+VenantesOptions.xml
+VenantesOptions.lua
+
 

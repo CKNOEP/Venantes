@@ -32,10 +32,10 @@ function VenantesConfig_Toggle()
         return;
     end
     -- load configuration dialog
-	local loaded, message = LoadAddOn('VenantesOptions');
-	if (loaded) then
+	--local loaded, message = LoadAddOn('VenantesOptions');
+	--if (loaded) then
 		--PlaySound(850);
-		PlaySound(SOUNDKIT.READY_CHECK)
+		PlaySound(SOUNDKIT.IG_MINIMAP_OPEN)
 		if (not VenantesOptions.initialized) then
 			VenantesOptions:Initialize();
 			VenantesOptions.initialized = true;
@@ -46,14 +46,14 @@ function VenantesConfig_Toggle()
             VenantesOptions:UpdateData();
 			ShowUIPanel(VenantesOptionsFrame);
 		end
-	else
+	--else
 		--PlaySound('TellMessage');
-        if message ~= nil then
-            DEFAULT_CHAT_FRAME:AddMessage(L['LOAD_ERROR']..': '..message);
-        else
-            DEFAULT_CHAT_FRAME:AddMessage(L['LOAD_ERROR']);        
-        end
-	end
+        --if message ~= nil then
+            --DEFAULT_CHAT_FRAME:AddMessage(L['LOAD_ERROR']..': '..message);
+        --else
+            --DEFAULT_CHAT_FRAME:AddMessage(L['LOAD_ERROR']);        
+        --end
+	--end
 end
 VENANTES_SPELLS_TEXTURE = {
 	[132320]="Ability_Stealth",
@@ -391,7 +391,7 @@ end
 
 -- event callbacks
 function Venantes:PLAYER_ENTERING_WORLD()
-	print(self,event)
+	--print(self,event)
     SphereCore:InitPlayerInfos();
     SphereCore:MountZoneInformation();
     SphereCore:UpdateSpellTable();
@@ -413,14 +413,14 @@ function Venantes:UNIT_PET()
 end
 
 function Venantes:BAG_UPDATE()
-    print("BAG_UPDATE",BAG_UPDATE)
+   -- print("BAG_UPDATE",BAG_UPDATE)
 	SphereInventory:InventoryScan();
     self:UpdateActions();
     self:UpdateStatus();
 end
 
 function Venantes:UNIT_INVENTORY_CHANGED(unit)
- print("event",UNIT_INVENTORY_CHANGED)
+ --print("event",UNIT_INVENTORY_CHANGED)
     if unit == 'player' then
     
     self:UpdateAmmoItem();

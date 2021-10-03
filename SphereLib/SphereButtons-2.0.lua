@@ -249,7 +249,7 @@ function SphereButtons:ButtonUpdateMenus()
 						print("Etat");
 					]])
 					menuStateHeader:Execute([[ 
-						print("Execute",self:GetName(),self:GetAttribute("_onclick"))
+						--print("Execute",self:GetName(),self:GetAttribute("_onclick"))
 					]])							
 								
 				end
@@ -559,7 +559,7 @@ end
 function SphereButtons:SphereSetSpell(mouseButton, spellName) 
    
 	local sphere = _G[self.buttons.prefix..'Sphere'];
-        print ("Sphere",sphere:GetName(),mouseButton, spellName) 
+        --print ("Sphere",sphere:GetName(),mouseButton, spellName) 
 	if sphere ~= nil then
         if mouseButton == 'LeftButton' then
             sphere:SetAttribute('type1', 'spell');
