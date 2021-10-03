@@ -1,12 +1,10 @@
 -----------------------------------------------------------------------
 |                                                                     |
-|	Venantes 2                                                    |
+|	Venantes 2   reborn TBC CLASSIC                                     |
 |                                                                     |
 -----------------------------------------------------------------------
 
-Maintainer: Zirah on Blackhand (EU, Alliance)
-Webpage: http://zirah.dunkelklingen.de/venantes.php
-
+Maintainer: Lanscestre 
 
 Venantes is mod to help the Hunter manage the aspects, tracking, traps 
 and pet spells, potions, drink/food and messages.
