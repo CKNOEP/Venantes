@@ -193,14 +193,27 @@ function SphereButtons:ButtonUpdateMenuStatus() -- Petits boutons des menus
     end
 end
 
-function SphereButtons:ButtonUpdateCooldown()
+function SphereButtons:ButtonUpdateCooldown(unitId, spell, rank, spellID)
 	if self.buttons ~= nil and self.buttons.menus ~= nil then 
-		for menuId, menuActions in pairs(self.buttons.menus) do
-		local menuButton = _G[self.buttons.prefix..'Button'..menuId]
-		Venantes:OnDragStop(menuButton)	
-		
-		end
+	print ("CD")
+    
+        for menuId, menuActions in pairs(self.buttons.menus) do
+			-- print(menuActions,menuId,table.getn(menuActions))
+			   
+			   for i = 1, table.getn(menuActions), 1 do
+ 
+							--myCooldown = _G[self.buttons.prefix..'Button'..menuId..i.."Cooldown"]
+							CD = _G[self.buttons.prefix..'Button'..menuId..i.."Cooldown"]
+
+							myCooldown:Show()
+							print ("CDframe Name",  CD:GetName(), "Duration ",CD:GetCooldownDuration(),"Spell",spell,"Rank",rank )							
+
+			 end
+
+		end 
+
 	end
+		
 end
 
 
@@ -216,10 +229,10 @@ function SphereButtons:ButtonUpdateMenus()
                     -- create state header
                     --Introduit a WLTK Patch 3.0 - SecureHandlerClickTemplate
 				--      menuStateHeader = CreateFrame('Frame', self.buttons.prefix..'Button'..menuId..'StateHeader', nil, "SecureStateHeaderTemplate");
-                    menuStateHeader = CreateFrame('Frame', self.buttons.prefix..'Button'..menuId..'StateHeader', nil,  "SecureHandlerAttributeTemplate SecureHandlerAttributeTemplate SecureHandlerMouseUpDownTemplate SecureHandlerStateTemplate  SecureHandlerEnterLeaveTemplate");
-					
+                    menuStateHeader = CreateFrame('BUTTON', self.buttons.prefix..'Button'..menuId..'StateHeader', UIParent,  "SecureHandlerAttributeTemplate SecureHandlerClickTemplate SecureHandlerMouseUpDownTemplate SecureHandlerStateTemplate  SecureHandlerEnterLeaveTemplate");
+
                     menuStateHeader:SetAllPoints(menuButton);     
-                    
+
                     -- events to childs
                     menuButton:SetAttribute('childraise1', true);
                     menuButton:SetAttribute('childstate1', '$input');
@@ -243,17 +256,14 @@ function SphereButtons:ButtonUpdateMenus()
                     menuStateHeader:SetAttribute('delaystatemap-anchor-mouseup', '1:0');
                     menuStateHeader:SetAttribute('delaytimemap-anchor-mouseup', '4');
                     menuStateHeader:SetAttribute('delayhovermap-anchor-mouseup', 'true');       
-
-					-- Onclick
-					menuStateHeader:SetAttribute("_onclick", [[
-						print("Etat");
-					]])
-					menuStateHeader:Execute([[ 
-						--print("Execute",self:GetName(),self:GetAttribute("_onclick"))
-					]])							
+					
+					menuStateHeader:SetAttribute("_onclick", [=[
+					print ("menuStateHeader:GetAttribute", menuStateHeader:GetAttribute('state')
+					]=]); 
+					
 								
 				end
-               
+               print (menuActions,"Venantes.db.profile.menuKeepOpen",Venantes.db.profile.menuKeepOpen)
 				if Venantes.db.profile.menuKeepOpen then
                    menuButton:SetAttribute('onmouseupbutton1', '');   
          		
@@ -351,7 +361,8 @@ function SphereButtons:ButtonUpdateMenus()
                         if actionType == 'spell' or actionType == 'item' then
                             button:SetAttribute('type1', actionType);
                             button:SetAttribute(actionType..'1', actionName);
-                            buttonTexture = _G[button:GetName()..'_Icon'];
+                           
+						    buttonTexture = _G[button:GetName()..'_Icon'];
                             
 							if not buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..actionTexture) then
                                 buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\WoWUnknownItem01');
@@ -370,7 +381,9 @@ function SphereButtons:ButtonUpdateMenus()
 							
 							buttonTexture:SetTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..Bt_Texture) 
 							myCooldown = CreateFrame("Cooldown", self.buttons.prefix..'Button'..menuId..i.."Cooldown", button, "CooldownFrameTemplate")
-							myCooldown:SetAllPoints()
+							
+							
+							myCooldown:SetAllPoints(button)
 							myCooldown:SetSwipeTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\'..Bt_Texture)
 							myCooldown:SetBlingTexture('Interface\\AddOns\\'..self.buttons.prefix..'\\UI\\Icons\\Cooldown_star4')
 							myCooldown:SetUseCircularEdge(true)
@@ -381,6 +394,7 @@ function SphereButtons:ButtonUpdateMenus()
 							if duration then
 							myCooldown:SetCooldown(start, duration)
 							myCooldown:Show()
+							print ("Show")
 							else
 							myCooldown:Hide()
 							end
@@ -409,6 +423,8 @@ function SphereButtons:ButtonUpdateMenus()
         end
     end
 end
+
+
 
 -- register button actions
 function SphereButtons:ButtonRegisterActions(actionsTable) 

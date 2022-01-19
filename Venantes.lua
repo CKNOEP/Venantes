@@ -432,8 +432,8 @@ function Venantes:ZONE_CHANGED_NEW_AREA()
     self:UpdateActions();
 end
 
-function Venantes:UNIT_SPELLCAST_SENT(unitId, spell, rank)
-    --print(unitId, spell, rank, target)
+function Venantes:UNIT_SPELLCAST_SENT(unitId, spell, rank,SpellID)
+    SphereButtons:ButtonUpdateCooldown(unitId, spell, rank ,SpellID)
 	if unitId == 'player' then
         self:OnSpellCastStart(spell, rank, target);
         if self.lastSpell == nil then
@@ -480,8 +480,9 @@ function Venantes:UNIT_SPELLCAST_INTERRUPTED(unitId)
     end
 end
 
-function Venantes:UNIT_SPELLCAST_SUCCEEDED(unitId, spell, rank)
-    --print('success',unitId, spell, rank)
+function Venantes:UNIT_SPELLCAST_SUCCEEDED(unitId, spell, rank,SpellID)
+    --print('success',unitId, spell, rank,SpellID)
+	SphereButtons:ButtonUpdateCooldown(unitId, spell, rank ,SpellID)
 	if unitId == 'player' then
         if self.lastSpell ~= nil then
             if self.lastSpell ~= nil and self.lastSpell.spell ~= nil and spell == self.lastSpell.spell then
@@ -493,8 +494,8 @@ function Venantes:UNIT_SPELLCAST_SUCCEEDED(unitId, spell, rank)
         end
      
 	end
-SphereButtons:ButtonUpdateCooldown()
-SphereButtons:ButtonUpdateMenus();
+
+
 
 end
 
@@ -522,7 +523,7 @@ end
 
 -- tooltip functions
 function Venantes:ShowTooltip(element, buttonId, anchor)
-   -- print(element, buttonId, anchor)
+    --print(element, buttonId, anchor)
 	if not self.db.profile.buttonTooltips then
         return
     end
@@ -943,7 +944,7 @@ function Venantes:UpdateActionButtonStatus(buttonId, currentMana)
     if buttonEnabled then 
         SphereButtons:ButtonSetStatus(buttonId, true);     
     else
-        SphereButtons:ButtonSetStatus(buttonId, false);      
+        --SphereButtons:ButtonSetStatus(buttonId, false);      
     end
 end
 
@@ -1013,10 +1014,13 @@ function Venantes:UpdateActions()
     -- action button one
     self:UpdateActionButton('ActionOne');
     self:UpdateActionButton('ActionTwo');
-    self:UpdateActionButton('ActionThree');
+    -- action button three 
+	self:UpdateActionButton('ActionThree');
     
-    -- action button three
-    SphereButtons:ButtonUpdateMenus();
+ 
+    
+	SphereButtons:ButtonUpdateMenus();
+	
     -- set remembered spells and show icon for right click
     self:UpdateMenuButtonSpells('TrackingMenu', 'Ability_Tracking');
     self:UpdateMenuButtonSpells('AspectMenu', 'Spell_Nature_RavenForm');

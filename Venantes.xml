@@ -111,10 +111,9 @@
 		</Size>
         <Scripts>
 			<OnEnter>
-				<!-- Venantes:ShowTooltip(this, "ATTRIBUTES", "ANCHOR_LEFT");-->
-				
+								
 				Venantes:ShowTooltip(self, "ATTRIBUTES", "ANCHOR_LEFT")
-				<!-- le this ne renvoi pas correctement le nom de la frame -->
+				
 			</OnEnter>
 		</Scripts>
     </Button>
@@ -212,6 +211,8 @@
 	</Button>
     <Button name="VenantesButtonPetMenu" inherits="VenantesMenuButtonTemplate">
         <Scripts>
+			
+			
 			<OnEnter>
 				Venantes:ShowTooltip(VenantesButtonPetMenu, "PETMENU", "ANCHOR_LEFT");
 			</OnEnter>
